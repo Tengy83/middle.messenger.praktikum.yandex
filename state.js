@@ -1,0 +1,186 @@
+export const state = {
+  store: {
+    Header: {
+      dom: 'header',
+      className: 'header',
+      classLogoLinkName: 'header__logo-link',
+      logoLink: '#',
+      logoImgUrl: './img/logo.svg',
+      logoTxt: 'FriendlyMessage',
+      logoLinkDataPage: 'chats',
+      userLink: '#',
+      classUserLink: 'header__user-link',
+      userLinkDataPage: 'user',
+      userImgUrl: './img/user_icon_w.svg',
+      classUserImg: 'header__user-img',
+      userName: 'Евгений',
+    },
+    AuthorizationForm: {
+      dom: 'div',
+      className: 'authorization',
+      titleClass: 'authorization__title',
+      title: `С FriendlyMessage вы всегда<br /> остаетесь на связи со своими знакомыми.`,
+      form: {
+        action: '/user',
+        method: 'post',
+        className: 'authorization__form form',
+
+        inputs: {
+          login: {
+            type: 'text',
+            name: 'login',
+            className: 'form__input login',
+            placeholder: 'Логин',
+          },
+          password: {
+            type: 'password',
+            name: 'password',
+            className: 'form__input password',
+            placeholder: 'Пароль',
+          },
+        },
+        buttons: {
+          submit: {
+            tag: 'button',
+            type: 'submit',
+            className: 'btn',
+            title: 'Войти',
+          },
+          forgotPass: {
+            tag: 'a',
+            link: '#',
+            className: 'form__forgot_pass form__link',
+            title: 'Забыли пароль?',
+          },
+          register: {
+            tag: 'a',
+            link: '#',
+            className: 'btn btn-red form__register_link page_link',
+            title: 'Регистрация',
+            dataPage: 'registration',
+            hr: true,
+          },
+        },
+      },
+    },
+    RegistrationForm: {
+      dom: 'div',
+      className: 'registration',
+      titleClass: 'registration__title',
+      title: 'Регистрация',
+      form: {
+        action: 'user/registration',
+        method: 'post',
+        className: 'registration__form form',
+        inputs: {
+          email: {
+            type: 'email',
+            name: 'email',
+            className: 'form__input email',
+            placeholder: 'Почта',
+          },
+          login: {
+            type: 'text',
+            name: 'login',
+            className: 'form__input login',
+            placeholder: 'Логин',
+          },
+          firstName: {
+            type: 'text',
+            name: 'first_name',
+            className: 'form__input first_name',
+            placeholder: 'Имя',
+          },
+          secondName: {
+            type: 'text',
+            name: 'second_name',
+            className: 'form__input second_name',
+            placeholder: 'Фамилия',
+          },
+          phone: {
+            type: 'tel',
+            name: 'phone',
+            className: 'form__input phone',
+            placeholder: 'Телефон',
+          },
+          password: {
+            type: 'password',
+            name: 'password',
+            className: 'password',
+            placeholder: 'Пароль',
+          },
+          passwordRepeat: {
+            type: 'password',
+            name: 'passwordRepeat',
+            className: 'passwordRepeat',
+            placeholder: 'Пароль (еще раз)',
+          },
+        },
+        buttons: {
+          submit: {
+            tag: 'button',
+            type: 'submit',
+            className: 'btn',
+            title: 'Зарегистрироваться',
+          },
+          login: {
+            tag: 'a',
+            link: '#',
+            className: 'form__login-link form__link',
+            title: 'Войти',
+            dataPage: 'home',
+          },
+        },
+      },
+    },
+    UsersList: {
+      dom: 'div',
+      className: 'chats-list',
+      form: {
+        action: 'search/',
+        method: 'get',
+        className: 'search__form form',
+        inputs: {
+          search: {
+            type: 'text',
+            name: 'search',
+            className: 'form__input search',
+            placeholder: 'Поиск',
+          },
+        },
+        buttons: {
+          submit: {
+            tag: 'button',
+            type: 'submit',
+            className: 'btn-search',
+            title: '<span></span>',
+          },
+        },
+      },
+      newChatLink: {
+        link: '#',
+        className: 'btn btn-grey new_chat_link',
+        title: '<span>Новый чат</span>',
+      },
+    },
+    User: {
+      dom: 'div',
+      className: 'user',
+      email: 'yandex@ya.ru',
+      login: 'Evgenii',
+      first_name: 'Евгений',
+      second_name: 'Программер',
+      chat_name: 'Evgenii',
+      phone: '+7 (777) 777-77-77',
+    },
+    Error404: {
+      dom: 'div',
+      className: 'error',
+      errorTitle: '404',
+      errorText: `Страница, которую<br>вы ищете, не найдена.`,
+      link: '/',
+      linkTitle: 'Вернуться на главную',
+      dataPage: 'home',
+    },
+  },
+};

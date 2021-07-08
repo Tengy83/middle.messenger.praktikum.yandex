@@ -1,0 +1,106 @@
+@import 'fonts';
+@import 'variables';
+@import 'mixins';
+
+@import 'reset';
+
+html {
+  font-size: $fs;
+}
+body {
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  color: $dark-text-color;
+  background: $bg-body;
+}
+
+input {
+  width: 100%;
+  padding: 0.3rem 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid $border-grey;
+  background: transparent;
+  color: $grey-text-color;
+}
+
+a,
+.link {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+  &:visited,
+  &:active {
+    color: $link-color;
+  }
+}
+
+.btn,
+button {
+  height: 44px;
+  width: 100%;
+  position: relative;
+  border-radius: 18px;
+  font-size: 1rem;
+  @include flex(center, center);
+  @include button($light-text-color, $link-color, transparent);
+}
+
+.btn-red {
+  @include button($light-text-color, $link-red, transparent);
+}
+.btn-grey {
+  color: $grey-text-color;
+  border: 1px solid $grey-text-color;
+  background: transparent;
+  height: 30px;
+
+  &:visited,
+  &:active,
+  &.active {
+    color: $grey-text-color;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background: transparent;
+    text-decoration: none;
+    color: $grey-text-color;
+    cursor: pointer;
+  }
+}
+
+hr {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: $border-grey;
+  margin: 20px 0;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: $header-height auto;
+}
+
+.messenger-wrapper {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: $chats-width auto;
+}
+
+// Modules
+// @import url(../modules/header/header.scss);
+@import url(../modules/headerUser/headerUser.scss);
+@import url(../modules/authorization/authorization.scss);
+@import url(../modules/registration/registration.scss);
+@import url(../modules/usersList/usersList.scss);
+@import url(../modules/chatStub/chatStub.scss);
+@import url(../modules/error/error.scss);
+@import url(../modules/moduleStub/moduleStub.scss);
