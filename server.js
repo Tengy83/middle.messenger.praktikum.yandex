@@ -1,13 +1,13 @@
 const express = require('express');
+const Bundler = require('parcel-bundler');
 
 const app = express();
 const PORT = 3000;
+const file = `./index.html`;
 
-app.use(express.static(__dirname + '/dist'));
+const bundler = new Bundler(file, { watch: true, cache: false });
 
-app.use(function (req, res, next) {
-  res.status(404).send('Error: 404');
-});
+app.use(bundler.middleware());
 
 app.listen(PORT, function () {
   console.log(`Server running at http://localhost:${PORT}`);
