@@ -1,3 +1,5 @@
+import { Templator } from './Templator';
+
 export function getObjValue(obj, path, defaultValue) {
   const keys = path.split('.');
   let result = obj;
@@ -100,10 +102,7 @@ export function domCreate(tagName, classes = '') {
   return el;
 }
 
-export function contentWrapper(content) {
-  return `
-  <div class="messenger-wrapper">
-    ${content}
-  </div>
-  `;
+export function returnTmpl(template, stateModule) {
+  const tmpl = new Templator(template);
+  return tmpl.compile(stateModule);
 }

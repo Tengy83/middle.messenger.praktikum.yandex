@@ -1,14 +1,19 @@
-import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import './src/scss/index.scss';
+import './scss/index.scss';
+
+import { createPage as error404 } from './pages/error404';
+import { createPage as home } from './pages/home';
+import { createPage as registration } from './pages/registration';
+import { createPage as chats } from './pages/chats';
+import { createPage as user } from './pages/user';
 
 const pages = {
-  error404: import('./src/pages/error404'),
-  home: import('./src/pages/home'),
-  registration: import('./src/pages/registration'),
-  chats: import('./src/pages/chats'),
-  user: import('./src/pages/user'),
+  error404,
+  home,
+  registration,
+  chats,
+  user,
 };
 
 const root = document.querySelector('#root');
@@ -23,7 +28,7 @@ const renderPage = async (name) => {
 
   removeClickHandlers();
 
-  root.innerHTML = template.createPage();
+  root.innerHTML = template();
 
   initClickHandlers();
 };

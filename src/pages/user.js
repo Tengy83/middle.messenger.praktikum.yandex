@@ -1,26 +1,14 @@
-import { Templator } from '../../utils/Templator';
-import { state } from '../../state';
+import { state as stateHeader } from '../modules/header/state';
+import { state as stateUser } from '../modules/user/state';
 
 import { createHeader } from '../modules/header/header.tmpl';
 import { createUser } from '../modules/user/user.tmpl';
 
+import { returnTmpl } from '../../utils/utils';
+
 export function createPage() {
-  const modules = {
-    Header: createHeader,
-    User: createUser,
-  };
-
-  let template = '';
-
-  Object.keys(modules).forEach(function (moduleName) {
-    const moduleTmpl = returnTmpl(modules[moduleName](), moduleName);
-    template += moduleTmpl;
-  });
-
-  return template.trim();
-}
-
-function returnTmpl(template, stateModuleName) {
-  const tmpl = new Templator(template);
-  return tmpl.compile(state.store[stateModuleName]);
+  return (
+    returnTmpl(createHeader(), stateHeader) +
+    returnTmpl(createUser(), stateUser)
+  );
 }

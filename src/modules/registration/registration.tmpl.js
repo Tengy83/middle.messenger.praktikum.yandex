@@ -1,6 +1,6 @@
 export function createRegistration() {
   return `
-  <{{ dom }} class="{{ className }}">
+  <div class="{{ className }}">
       <h1 class="{{ titleClass }}">
         {{title}}
       </h1>
@@ -33,6 +33,6 @@ export function createRegistration() {
 
         <{{form.buttons.login.tag}} href="{{form.buttons.login.link}}" class="{{form.buttons.login.className}}" data-page="{{form.buttons.login.dataPage}}">{{form.buttons.login.title}}</{{form.buttons.login.tag}}>
       </form>
-    </{{dom}}>
+    </div>
   `;
 }
