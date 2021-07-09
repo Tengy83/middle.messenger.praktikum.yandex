@@ -29,7 +29,7 @@ export function createRegistration() {
           placeholder="{{form.inputs.passwordRepeat.placeholder}}"
         />
 
-        <{{form.buttons.submit.tag}} type="{{form.buttons.submit.type}}" class="{{form.buttons.submit.className}}">{{form.buttons.submit.title}}</{{form.buttons.submit.tag}}>
+        <{{form.buttons.submit.tag}} type="{{form.buttons.submit.type}}" class="{{form.buttons.submit.className}}" disabled>{{form.buttons.submit.title}}</{{form.buttons.submit.tag}}>
 
         <{{form.buttons.login.tag}} href="{{form.buttons.login.link}}" class="{{form.buttons.login.className}}" data-page="{{form.buttons.login.dataPage}}">{{form.buttons.login.title}}</{{form.buttons.login.tag}}>
       </form>

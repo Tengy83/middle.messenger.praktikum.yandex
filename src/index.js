@@ -1,5 +1,3 @@
-import 'regenerator-runtime/runtime';
-
 import './scss/index.scss';
 
 import { createPage as error404 } from './pages/error404';
@@ -18,20 +16,12 @@ const pages = {
 
 const root = document.querySelector('#root');
 
-const renderPage = async (name) => {
+function renderPage(name) {
   let template = '';
   if (pages.hasOwnProperty(name)) {
-    try {
-      template = await pages[name];
-    } catch (err) {
-      console.error(err);
-    }
+    template = pages[name];
   } else {
-    try {
-      template = await pages['error404'];
-    } catch (err) {
-      console.error(err);
-    }
+    template = pages['error404'];
   }
 
   removeClickHandlers();
@@ -39,7 +29,7 @@ const renderPage = async (name) => {
   root.innerHTML = template();
 
   initClickHandlers();
-};
+}
 
 const errorUrl = window.location.pathname.length;
 
@@ -52,22 +42,22 @@ if (
   renderPage('home');
 }
 
-const initClickHandlers = () => {
+function initClickHandlers() {
   const links = document.querySelectorAll('[data-page]');
 
   for (const link of links) {
     link.addEventListener('click', pageRenderListaner);
   }
-};
+}
 
-const removeClickHandlers = () => {
+function removeClickHandlers() {
   const links = document.querySelectorAll('[data-page]');
 
   for (const link of links) {
     link.removeEventListener('click', pageRenderListaner);
   }
-};
-const pageRenderListaner = (ev) => {
+}
+function pageRenderListaner(ev) {
   ev.preventDefault();
   if (ev.target.tagName === 'A') {
     renderPage(ev.target.dataset.page);
@@ -82,4 +72,4 @@ const pageRenderListaner = (ev) => {
       renderPage(nextDom.dataset.page);
     }
   }
-};
+}

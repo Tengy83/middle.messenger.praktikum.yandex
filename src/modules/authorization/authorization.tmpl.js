@@ -13,7 +13,7 @@ export function createAuthorization(options) {
           class="{{form.inputs.password.className}}"
           placeholder="{{form.inputs.password.placeholder}}"
         />
-        <{{form.buttons.submit.tag}} type="{{form.buttons.submit.type}}" class="{{form.buttons.submit.className}}">{{form.buttons.submit.title}}</{{form.buttons.submit.tag}}>
+        <{{form.buttons.submit.tag}} type="{{form.buttons.submit.type}}" class="{{form.buttons.submit.className}}" disabled>{{form.buttons.submit.title}}</{{form.buttons.submit.tag}}>
         <{{form.buttons.forgotPass.tag}} href="{{form.buttons.forgotPass.link}}" class="{{form.buttons.forgotPass.className}}" data-page="{{form.buttons.forgotPass.dataPage}}">{{form.buttons.forgotPass.title}}</{{form.buttons.forgotPass.tag}}>
 
         <hr />
