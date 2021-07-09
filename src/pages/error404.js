@@ -1,26 +1,14 @@
-import { Templator } from '../../utils/Templator';
-import { state } from '../../state';
+import { state as stateHeader } from '../modules/header/state';
+import { state as stateError } from '../modules/error/state';
 
 import { createHeader } from '../modules/header/header.tmpl';
 import { createError } from '../modules/error/error.tmpl';
 
+import { returnTmpl } from '../../utils/utils';
+
 export function createPage() {
-  const modules = {
-    Header: createHeader,
-    Error404: createError,
-  };
-
-  let template = '';
-
-  Object.keys(modules).forEach(function (moduleName) {
-    const moduleTmpl = returnTmpl(modules[moduleName](), moduleName);
-    template += moduleTmpl;
-  });
-
-  return template.trim();
-}
-
-function returnTmpl(template, stateModuleName) {
-  const tmpl = new Templator(template);
-  return tmpl.compile(state.store[stateModuleName]);
+  return (
+    returnTmpl(createHeader(), stateHeader) +
+    returnTmpl(createError(), stateError)
+  );
 }

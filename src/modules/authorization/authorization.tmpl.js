@@ -1,6 +1,6 @@
 export function createAuthorization(options) {
   return `
-    <{{ dom }} class="{{ className }}">
+    <div class="{{ className }}">
       <h1 class="{{ titleClass }}">
         {{title}}
       </h1>
@@ -20,7 +20,7 @@ export function createAuthorization(options) {
 
         <{{form.buttons.register.tag}} href="{{form.buttons.register.link}}" class="{{form.buttons.register.className}}" data-page="{{form.buttons.register.dataPage}}">{{form.buttons.register.title}}</{{form.buttons.register.tag}}>
       </form>
-    </{{dom}}>
+    </div>
   `;
 }
 

@@ -1,35 +1,17 @@
-import { Templator } from '../../utils/Templator';
-import { state } from '../../state';
-import { contentWrapper } from '../../utils/utils';
+import { state as stateHeader } from '../modules/headerUser/state';
+import { state as stateUsersList } from '../modules/usersList/state';
+import { contentWrapper as chatsContentWrapper } from '../layouts/contentWrapper';
 
 import { createHeader } from '../modules/headerUser/headerUser.tmpl';
 import { createUsersList } from '../modules/usersList/usersList.tmpl';
 import { createChatStub } from '../modules/chatStub/chatStub.tmpl';
 
+import { returnTmpl } from '../../utils/utils';
+
 export function createPage() {
-  const modules = {
-    Header: createHeader,
-    UsersList: createUsersList,
-  };
+  let template = returnTmpl(createHeader(), stateHeader);
+  let templateWrapper =
+    returnTmpl(createUsersList(), stateUsersList) + createChatStub();
 
-  let template = '';
-  let templateWrapper = '';
-
-  Object.keys(modules).forEach(function (moduleName) {
-    const moduleTmpl = returnTmpl(modules[moduleName](), moduleName);
-    if (moduleName !== 'Header') {
-      templateWrapper += moduleTmpl;
-    } else {
-      template += moduleTmpl;
-    }
-  });
-
-  templateWrapper += createChatStub();
-
-  return template.trim() + contentWrapper(templateWrapper.trim());
-}
-
-function returnTmpl(template, stateModuleName) {
-  const tmpl = new Templator(template);
-  return tmpl.compile(state.store[stateModuleName]);
+  return template + chatsContentWrapper(templateWrapper, 'messenger-wrapper');
 }
