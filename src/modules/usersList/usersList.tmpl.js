@@ -3,10 +3,10 @@ export function createUsersList() {
   <div class="{{ className }}">
   <form action="{{form.action}}" method="{{form.method}}" class="{{form.className}}">
     <input type="{{form.inputs.search.type}}" name="{{form.inputs.search.name}}" class="{{form.inputs.search.className}}" placeholder="{{form.inputs.search.placeholder}}" />
-    <{{form.buttons.submit.tag}} type="{{form.buttons.submit.type}}" class="{{form.buttons.submit.className}}">{{form.buttons.submit.title}}</{{form.buttons.submit.tag}}>
+    <{{form.buttons.submit.tag}} type="{{form.buttons.submit.type}}" class="{{form.buttons.submit.className}}" disabled>{{form.buttons.submit.title}}</{{form.buttons.submit.tag}}>
   </form>
 
-  <a href="{{newChatLink.link}}" class="{{newChatLink.className}}">{{newChatLink.title}}</a>
+  <a href="{{newChatLink.link}}" class="{{newChatLink.className}}" disabled>{{newChatLink.title}}</a>
   
   <ul class="user-list">
       <li class="user-list__item user-item">
