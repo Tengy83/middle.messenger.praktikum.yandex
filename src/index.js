@@ -21,9 +21,17 @@ const root = document.querySelector('#root');
 const renderPage = async (name) => {
   let template = '';
   if (pages.hasOwnProperty(name)) {
-    template = await pages[name];
+    try {
+      template = await pages[name];
+    } catch (err) {
+      console.error(err);
+    }
   } else {
-    template = await pages['error404'];
+    try {
+      template = await pages['error404'];
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   removeClickHandlers();
