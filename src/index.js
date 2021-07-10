@@ -24,11 +24,11 @@ function renderPage(name) {
     template = pages['error404'];
   }
 
-  removeClickHandlers();
+  // removeClickHandlers();
 
   root.innerHTML = template();
 
-  initClickHandlers();
+  // initClickHandlers();
 }
 
 const errorUrl = window.location.pathname.length;
