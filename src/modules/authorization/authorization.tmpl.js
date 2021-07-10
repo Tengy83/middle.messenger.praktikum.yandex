@@ -14,11 +14,11 @@ export function createAuthorization(options) {
           placeholder="{{form.inputs.password.placeholder}}"
         />
         <{{form.buttons.submit.tag}} type="{{form.buttons.submit.type}}" class="{{form.buttons.submit.className}}" disabled>{{form.buttons.submit.title}}</{{form.buttons.submit.tag}}>
-        <{{form.buttons.forgotPass.tag}} href="{{form.buttons.forgotPass.link}}" class="{{form.buttons.forgotPass.className}}" data-page="{{form.buttons.forgotPass.dataPage}}">{{form.buttons.forgotPass.title}}</{{form.buttons.forgotPass.tag}}>
+        <{{form.buttons.forgotPass.tag}} href="{{form.buttons.forgotPass.link}}" class="{{form.buttons.forgotPass.className}}" onclick="pageRenderListaner(this)" data-page="{{form.buttons.forgotPass.dataPage}}">{{form.buttons.forgotPass.title}}</{{form.buttons.forgotPass.tag}}>
 
         <hr />
 
-        <{{form.buttons.register.tag}} href="{{form.buttons.register.link}}" class="{{form.buttons.register.className}}" data-page="{{form.buttons.register.dataPage}}">{{form.buttons.register.title}}</{{form.buttons.register.tag}}>
+        <{{form.buttons.register.tag}} href="{{form.buttons.register.link}}" class="{{form.buttons.register.className}}" onclick="pageRenderListaner(this)" data-page="{{form.buttons.register.dataPage}}">{{form.buttons.register.title}}</{{form.buttons.register.tag}}>
       </form>
     </div>
   `;

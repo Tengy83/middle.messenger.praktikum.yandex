@@ -57,19 +57,9 @@ function removeClickHandlers() {
     link.removeEventListener('click', pageRenderListaner);
   }
 }
-function pageRenderListaner(ev) {
-  ev.preventDefault();
-  if (ev.target.tagName === 'A') {
-    renderPage(ev.target.dataset.page);
-  } else {
-    let prevDom = ev.target;
-    let nextDom = prevDom.parentNode;
-    while (nextDom.tagName !== 'A' || nextDom.tagName == 'BODY') {
-      prevDom = nextDom;
-      nextDom = prevDom.parentNode;
-    }
-    if (nextDom.dataset.page) {
-      renderPage(nextDom.dataset.page);
-    }
+window.pageRenderListaner = function (ev) {
+  if (ev.hasAttribute('data-page')) {
+    renderPage(ev.getAttribute('data-page'));
   }
-}
+  return false;
+};
