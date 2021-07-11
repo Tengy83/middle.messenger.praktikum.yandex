@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "parcel ./static/index.html",
     "build": "parcel build ./static/index.html --no-source-maps --no-cache",
-    "start": "parcel ./static/index.html --port 3000 && node ./server.js"
+    "start": "parcel ./static/index.html --port 3000 && node --unhandled-rejection=strict ./server.js"
   },
   "repository": {
     "type": "git",
