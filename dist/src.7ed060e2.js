@@ -184,7 +184,22 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/modules/headerUser/headerUser.scss":[function(require,module,exports) {
+},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../src/modules/button/button.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/form/components/input/input.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/form/form.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./components/input/input.scss":"../src/modules/form/components/input/input.scss","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/headerUser/headerUser.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -209,6 +224,21 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/user/user.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/editUser/editUser.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/changePassword/changePassword.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
 },{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/error/error.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
@@ -224,7 +254,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"../modules/headerUser/headerUser.scss":"../src/modules/headerUser/headerUser.scss","../modules/authorization/authorization.scss":"../src/modules/authorization/authorization.scss","../modules/registration/registration.scss":"../src/modules/registration/registration.scss","../modules/usersList/usersList.scss":"../src/modules/usersList/usersList.scss","../modules/chatStub/chatStub.scss":"../src/modules/chatStub/chatStub.scss","../modules/error/error.scss":"../src/modules/error/error.scss","../modules/moduleStub/moduleStub.scss":"../src/modules/moduleStub/moduleStub.scss","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/header/state.js":[function(require,module,exports) {
+},{"../modules/button/button.scss":"../src/modules/button/button.scss","../modules/form/form.scss":"../src/modules/form/form.scss","../modules/headerUser/headerUser.scss":"../src/modules/headerUser/headerUser.scss","../modules/authorization/authorization.scss":"../src/modules/authorization/authorization.scss","../modules/registration/registration.scss":"../src/modules/registration/registration.scss","../modules/usersList/usersList.scss":"../src/modules/usersList/usersList.scss","../modules/chatStub/chatStub.scss":"../src/modules/chatStub/chatStub.scss","../modules/user/user.scss":"../src/modules/user/user.scss","../modules/editUser/editUser.scss":"../src/modules/editUser/editUser.scss","../modules/changePassword/changePassword.scss":"../src/modules/changePassword/changePassword.scss","../modules/error/error.scss":"../src/modules/error/error.scss","../modules/moduleStub/moduleStub.scss":"../src/modules/moduleStub/moduleStub.scss","_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../src/modules/header/state.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -584,6 +614,33 @@ var state = {
   }
 };
 exports.state = state;
+},{}],"../src/modules/form/components/input/input.tmpl.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createInput = createInput;
+
+function createInput(inputState, inputName) {
+  var placeholder = inputState['placeholder'] ? "placeholder=\"{{form.inputs.".concat(inputName, ".placeholder }}\"") : '';
+  var value = inputState['value'] ? "value=\"{{form.inputs.".concat(inputName, ".value }}\"") : '';
+  return "<input type=\"{{form.inputs.".concat(inputName, ".type}}\" name=\"{{form.inputs.").concat(inputName, ".name}}\" class=\"{{form.inputs.").concat(inputName, ".className}}\" ").concat(placeholder, " ").concat(value, " />");
+}
+},{}],"../src/modules/button/button.tmpl.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createButton = createButton;
+
+function createButton(buttonState, buttonName) {
+  var hr = buttonState['hr'] ? "<hr />" : '';
+  var href = buttonState['href'] ? "href=\"{{form.buttons.".concat(buttonName, ".link}}\"") : '';
+  var dataPage = buttonState['dataPage'] ? "data-page=\"{{form.buttons.".concat(buttonName, ".dataPage}}\"") : '';
+  return "".concat(hr, "<{{form.buttons.").concat(buttonName, ".tag}} ").concat(href, " class=\"{{form.buttons.").concat(buttonName, ".className}}\" ").concat(dataPage, ">{{form.buttons.").concat(buttonName, ".title}}</{{form.buttons.").concat(buttonName, ".tag}}>");
+}
 },{}],"../src/modules/form/form.tmpl.js":[function(require,module,exports) {
 "use strict";
 
@@ -592,32 +649,24 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createForm = createForm;
 
+var _input = require("./components/input/input.tmpl");
+
+var _button = require("../button/button.tmpl");
+
 function createForm(formState) {
-  var inputs = createInputs(formState.inputs) || '';
-  var buttons = createButtons(formState.buttons) || '';
+  var inputs = createComponentsTmpl(formState.inputs, _input.createInput) || '';
+  var buttons = createComponentsTmpl(formState.buttons, _button.createButton) || '';
   return "<form action=\"{{form.action}}\" method=\"{{form.method}}\" class=\"{{form.className}}\">".concat(inputs).concat(buttons, "</form>");
 }
 
-function createInputs(inputsState) {
-  var inputsTmpl = '';
-  Object.keys(inputsState).forEach(function (inputName) {
-    inputsTmpl += "<input type=\"{{form.inputs.".concat(inputName, ".type}}\" name=\"{{form.inputs.").concat(inputName, ".name}}\" class=\"{{form.inputs.").concat(inputName, ".className}}\" placeholder=\"{{form.inputs.").concat(inputName, ".placeholder}}\" />");
+function createComponentsTmpl(state, createTmpl) {
+  var tmpl = '';
+  Object.entries(state).forEach(function (compState) {
+    tmpl += createTmpl(compState[1], compState[0]);
   });
-  return inputsTmpl;
+  return tmpl;
 }
-
-function createButtons(buttonsState) {
-  var buttonsTmpl = '';
-  var hrDom = "<hr />";
-  Object.entries(buttonsState).forEach(function (buttonState) {
-    var hr = buttonState[1]['hr'] ? hrDom : '';
-    var href = buttonState[1]['href'] ? "href=\"{{form.buttons.".concat(buttonState[0], ".link}}\"") : '';
-    var dataPage = buttonState[1]['dataPage'] ? "data-page=\"{{form.buttons.".concat(buttonState[0], ".dataPage}}\"") : '';
-    buttonsTmpl += "".concat(hr, "<{{form.buttons.").concat(buttonState[0], ".tag}} ").concat(href, " class=\"{{form.buttons.").concat(buttonState[0], ".className}}\" ").concat(dataPage, ">{{form.buttons.").concat(buttonState[0], ".title}}</{{form.buttons.").concat(buttonState[0], ".tag}}>");
-  });
-  return buttonsTmpl;
-}
-},{}],"../src/modules/authorization/authorization.tmpl.js":[function(require,module,exports) {
+},{"./components/input/input.tmpl":"../src/modules/form/components/input/input.tmpl.js","../button/button.tmpl":"../src/modules/button/button.tmpl.js"}],"../src/modules/authorization/authorization.tmpl.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -909,25 +958,43 @@ Object.defineProperty(exports, "__esModule", {
 exports.state = void 0;
 var state = {
   className: 'user',
+  titleClass: 'user__title',
+  img: './img/user_profile.svg',
+  title: 'Александр',
   email: 'yandex@ya.ru',
-  login: 'Evgenii',
-  first_name: 'Евгений',
+  login: 'Alex',
+  first_name: 'Александр',
   second_name: 'Программер',
   chat_name: 'Evgenii',
-  phone: '+7 (777) 777-77-77'
+  phone: '+7 (777) 777-77-77',
+  form: {
+    buttons: {
+      submit: {
+        tag: 'button',
+        type: 'submit',
+        className: 'btn',
+        title: 'Редактировать',
+        dataPage: 'edit_user'
+      },
+      changePswLink: {
+        tag: 'a',
+        link: '#',
+        className: 'btn btn-red',
+        title: 'Изменить пароль',
+        dataPage: 'change_password'
+      },
+      back: {
+        tag: 'a',
+        link: '#',
+        className: 'back-link',
+        title: 'Выйти',
+        dataPage: 'chats',
+        hr: true
+      }
+    }
+  }
 };
 exports.state = state;
-},{}],"../src/modules/moduleStub/moduleStub.tmpl.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createModuleStub = createModuleStub;
-
-function createModuleStub(moduleName) {
-  return "<div class=\"module-stub\">\n    <h1 class=\"module-stub__title\"><strong>".concat(moduleName, "</strong> module is under development</h1>\n  </div>");
-}
 },{}],"../src/modules/user/user.tmpl.js":[function(require,module,exports) {
 "use strict";
 
@@ -936,12 +1003,23 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.createUser = createUser;
 
-var _moduleStub = require("../moduleStub/moduleStub.tmpl");
+var _button = require("../button/button.tmpl");
+
+var _state = require("./state");
 
 function createUser() {
-  return (0, _moduleStub.createModuleStub)('User');
+  return "<div class=\"{{ className }}\">\n    <img src=\"{{ img }}\" alt=\"{{ title }}\" />\n    <h1 class=\"{{ titleClass }}\">\n      {{title}}\n    </h1>\n    <div class=\"user-profile\">\n      <div class=\"user-profile__item user-email\">\n        <span class=\"user-email__title\">\u041F\u043E\u0447\u0442\u0430</span><span class=\"user-email__content\">{{ email }}</span>\n      </div>\n      <div class=\"user-profile__item user-login\">\n        <span class=\"user-login__title\">\u041B\u043E\u0433\u0438\u043D</span><span class=\"user-login__content\">{{ login }}</span>\n      </div>\n      <div class=\"user-profile__item user-f_name\">\n        <span class=\"user-f_name__title\">\u0418\u043C\u044F</span><span class=\"user-f_name__content\">{{ first_name }}</span>\n      </div>\n      <div class=\"user-profile__item user-s_name\">\n        <span class=\"user-s_name__title\">\u0424\u0430\u043C\u0438\u043B\u0438\u044F</span><span class=\"user-s_name__content\">{{ second_name }}</span>\n      </div>\n      <div class=\"user-profile__item user-c_name\">\n        <span class=\"user-c_name__title\">\u0418\u043C\u044F \u0432 \u0447\u0430\u0442\u0435</span><span class=\"user-c_name__content\">{{ chat_name }}</span>\n      </div>\n      <div class=\"user-profile__item user-phone\">\n        <span class=\"user-phone__title\">\u0422\u0435\u043B\u0435\u0444\u043E\u043D</span><span class=\"user-phone__content\">{{ phone }}</span>\n      </div>\n      ".concat(createButtonsTmpl(), "\n    </div>\n  </div>");
 }
-},{"../moduleStub/moduleStub.tmpl":"../src/modules/moduleStub/moduleStub.tmpl.js"}],"../src/pages/user.js":[function(require,module,exports) {
+
+function createButtonsTmpl() {
+  var buttons = '';
+  Object.entries(_state.state['form']['buttons']).forEach(function (buttonState) {
+    buttons += (0, _button.createButton)(buttonState[1], buttonState[0]);
+  });
+  console.log(buttons);
+  return buttons;
+}
+},{"../button/button.tmpl":"../src/modules/button/button.tmpl.js","./state":"../src/modules/user/state.js"}],"../src/pages/user.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -962,7 +1040,203 @@ var _utils = require("../../utils/utils");
 function createPage() {
   return (0, _utils.returnTmpl)((0, _header.createHeader)(), _state.state) + (0, _utils.returnTmpl)((0, _user.createUser)(), _state2.state);
 }
-},{"../modules/header/state":"../src/modules/header/state.js","../modules/user/state":"../src/modules/user/state.js","../modules/header/header.tmpl":"../src/modules/header/header.tmpl.js","../modules/user/user.tmpl":"../src/modules/user/user.tmpl.js","../../utils/utils":"../utils/utils.js"}],"../src/index.js":[function(require,module,exports) {
+},{"../modules/header/state":"../src/modules/header/state.js","../modules/user/state":"../src/modules/user/state.js","../modules/header/header.tmpl":"../src/modules/header/header.tmpl.js","../modules/user/user.tmpl":"../src/modules/user/user.tmpl.js","../../utils/utils":"../utils/utils.js"}],"../src/modules/editUser/state.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.state = void 0;
+var state = {
+  className: 'edit-user',
+  titleClass: 'edit-user__title',
+  title: 'Александр',
+  img: './img/user_profile.svg',
+  form: {
+    action: 'user/edit',
+    method: 'post',
+    className: 'edit-user__form form',
+    inputs: {
+      email: {
+        type: 'email',
+        name: 'email',
+        className: 'form__input email',
+        value: 'pochta@yandex.ru'
+      },
+      login: {
+        type: 'text',
+        name: 'login',
+        className: 'form__input login',
+        value: 'Alex'
+      },
+      firstName: {
+        type: 'text',
+        name: 'first_name',
+        className: 'form__input first_name',
+        value: 'Александр'
+      },
+      secondName: {
+        type: 'text',
+        name: 'second_name',
+        className: 'form__input second_name',
+        value: 'Александров'
+      },
+      chatsName: {
+        type: 'text',
+        name: 'chats_name',
+        className: 'form__input chats_name',
+        value: 'Алекс'
+      },
+      phone: {
+        type: 'tel',
+        name: 'phone',
+        className: 'form__input phone',
+        value: '+7 (909) 967 30 30'
+      },
+      file: {
+        type: 'file',
+        name: 'file',
+        className: 'form__input file'
+      }
+    },
+    buttons: {
+      submit: {
+        tag: 'button',
+        type: 'submit',
+        className: 'btn',
+        title: 'Редактировать'
+      },
+      userLink: {
+        tag: 'a',
+        link: '#',
+        className: 'form__user-link form__link',
+        title: 'Выйти',
+        dataPage: 'user'
+      }
+    }
+  }
+};
+exports.state = state;
+},{}],"../src/modules/editUser/editUser.tmpl.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createEditUser = createEditUser;
+
+var _state = require("./state");
+
+var _form = require("../form/form.tmpl");
+
+function createEditUser() {
+  return "<div class=\"{{ className }}\">\n    <img src=\"{{ img }}\" alt=\"{{ title }}\" />\n    <h1 class=\"{{ titleClass }}\">\n      {{title}}\n    </h1>\n    ".concat((0, _form.createForm)(_state.state.form), "\n  </div>");
+}
+},{"./state":"../src/modules/editUser/state.js","../form/form.tmpl":"../src/modules/form/form.tmpl.js"}],"../src/pages/editUser.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createPage = createPage;
+
+var _state = require("../modules/header/state");
+
+var _state2 = require("../modules/editUser/state");
+
+var _header = require("../modules/header/header.tmpl");
+
+var _editUser = require("../modules/editUser/editUser.tmpl");
+
+var _utils = require("../../utils/utils");
+
+function createPage() {
+  return (0, _utils.returnTmpl)((0, _header.createHeader)(), _state.state) + (0, _utils.returnTmpl)((0, _editUser.createEditUser)(), _state2.state);
+}
+},{"../modules/header/state":"../src/modules/header/state.js","../modules/editUser/state":"../src/modules/editUser/state.js","../modules/header/header.tmpl":"../src/modules/header/header.tmpl.js","../modules/editUser/editUser.tmpl":"../src/modules/editUser/editUser.tmpl.js","../../utils/utils":"../utils/utils.js"}],"../src/modules/changePassword/state.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.state = void 0;
+var state = {
+  className: 'change-password',
+  titleClass: 'change-password__title',
+  title: 'Сменить пароль',
+  form: {
+    action: 'user/changepsw',
+    method: 'post',
+    className: 'change-password__form form',
+    inputs: {
+      password: {
+        type: 'password',
+        name: 'password',
+        className: 'password',
+        placeholder: 'Пароль'
+      },
+      passwordRepeat: {
+        type: 'password',
+        name: 'passwordRepeat',
+        className: 'passwordRepeat',
+        placeholder: 'Пароль (еще раз)'
+      }
+    },
+    buttons: {
+      submit: {
+        tag: 'button',
+        type: 'submit',
+        className: 'btn',
+        title: 'Поменять пароль'
+      },
+      back: {
+        tag: 'a',
+        link: '#',
+        className: 'form__back-link form__link',
+        title: 'Отмена',
+        dataPage: 'user'
+      }
+    }
+  }
+};
+exports.state = state;
+},{}],"../src/modules/changePassword/changePassword.tmpl.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createChangePassword = createChangePassword;
+
+var _state = require("./state");
+
+var _form = require("../form/form.tmpl");
+
+function createChangePassword() {
+  return "<div class=\"{{ className }}\">\n    <h1 class=\"{{ titleClass }}\">\n      {{title}}\n    </h1>\n    ".concat((0, _form.createForm)(_state.state.form), "\n  </div>");
+}
+},{"./state":"../src/modules/changePassword/state.js","../form/form.tmpl":"../src/modules/form/form.tmpl.js"}],"../src/pages/changePassword.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createPage = createPage;
+
+var _state = require("../modules/header/state");
+
+var _state2 = require("../modules/changePassword/state");
+
+var _header = require("../modules/header/header.tmpl");
+
+var _changePassword = require("../modules/changePassword/changePassword.tmpl");
+
+var _utils = require("../../utils/utils");
+
+function createPage() {
+  return (0, _utils.returnTmpl)((0, _header.createHeader)(), _state.state) + (0, _utils.returnTmpl)((0, _changePassword.createChangePassword)(), _state2.state);
+}
+},{"../modules/header/state":"../src/modules/header/state.js","../modules/changePassword/state":"../src/modules/changePassword/state.js","../modules/header/header.tmpl":"../src/modules/header/header.tmpl.js","../modules/changePassword/changePassword.tmpl":"../src/modules/changePassword/changePassword.tmpl.js","../../utils/utils":"../utils/utils.js"}],"../src/index.js":[function(require,module,exports) {
 "use strict";
 
 require("./scss/index.scss");
@@ -977,6 +1251,10 @@ var _chats = require("./pages/chats");
 
 var _user = require("./pages/user");
 
+var _editUser = require("./pages/editUser");
+
+var _changePassword = require("./pages/changePassword");
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -988,7 +1266,9 @@ var pages = {
   home: _home.createPage,
   registration: _registration.createPage,
   chats: _chats.createPage,
-  user: _user.createPage
+  user: _user.createPage,
+  edit_user: _editUser.createPage,
+  change_password: _changePassword.createPage
 };
 var root = document.querySelector('#root');
 
@@ -1040,15 +1320,10 @@ function removeClickHandlers() {
 
 function pageRenderListener(ev) {
   ev.preventDefault();
-
-  if (ev.target.hasAttribute('data-page')) {
-    renderPage(ev.target.dataset.page);
-  } else {
-    var renderPageName = ev.target.closest('[data-page]').dataset.page;
-    renderPage(renderPageName);
-  }
+  var pageName = ev.currentTarget.dataset.page;
+  renderPage(pageName);
 }
-},{"./scss/index.scss":"../src/scss/index.scss","./pages/error404":"../src/pages/error404.js","./pages/home":"../src/pages/home.js","./pages/registration":"../src/pages/registration.js","./pages/chats":"../src/pages/chats.js","./pages/user":"../src/pages/user.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./scss/index.scss":"../src/scss/index.scss","./pages/error404":"../src/pages/error404.js","./pages/home":"../src/pages/home.js","./pages/registration":"../src/pages/registration.js","./pages/chats":"../src/pages/chats.js","./pages/user":"../src/pages/user.js","./pages/editUser":"../src/pages/editUser.js","./pages/changePassword":"../src/pages/changePassword.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -1076,7 +1351,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65312" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50081" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
