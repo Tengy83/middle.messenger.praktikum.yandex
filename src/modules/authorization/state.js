@@ -33,6 +33,7 @@ export const state = {
         link: '#',
         className: 'form__forgot_pass form__link',
         title: 'Забыли пароль?',
+        dataPage: 'forgot-pass',
       },
       register: {
         tag: 'a',
