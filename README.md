@@ -6,7 +6,7 @@
 
 ## Дизайн
 
-![Ссылка на дизайн](https://www.figma.com/file/KvIpvIU4MnULKWsbn27dRT/FriendlyMessage?node-id=0%3A1)
+https://www.figma.com/file/KvIpvIU4MnULKWsbn27dRT/FriendlyMessage?node-id=0%3A1
 
 ## Запуск
 
@@ -16,4 +16,4 @@
 
 ## Netlify
 
-![Ссылка на netlify]()
+https://friendlymessage.netlify.app

@@ -1,11 +1,9 @@
-export function createUsersList() {
-  return `
-  <div class="{{ className }}">
-  <form action="{{form.action}}" method="{{form.method}}" class="{{form.className}}">
-    <input type="{{form.inputs.search.type}}" name="{{form.inputs.search.name}}" class="{{form.inputs.search.className}}" placeholder="{{form.inputs.search.placeholder}}" />
-    <{{form.buttons.submit.tag}} type="{{form.buttons.submit.type}}" class="{{form.buttons.submit.className}}" disabled>{{form.buttons.submit.title}}</{{form.buttons.submit.tag}}>
-  </form>
+import { state } from './state';
+import { createForm } from '../form/form.tmpl';
 
+export function createUsersList() {
+  return `<div class="{{ className }}">
+  ${createForm(state.form)}
   <a href="{{newChatLink.link}}" class="{{newChatLink.className}}" disabled>{{newChatLink.title}}</a>
   
   <ul class="user-list">
@@ -70,6 +68,5 @@ export function createUsersList() {
         /></a>
       </li>
     </ul>
-    </div>
-`;
+    </div>`;
 }

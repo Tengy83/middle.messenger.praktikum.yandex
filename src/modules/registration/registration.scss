@@ -3,7 +3,7 @@
 
 .registration {
   @include flex(center, center);
-  padding: 0 15px;
+  padding: 30px 15px;
   flex-direction: column;
 
   &__title {

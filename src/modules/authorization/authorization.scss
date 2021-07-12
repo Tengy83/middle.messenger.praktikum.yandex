@@ -3,7 +3,10 @@
 
 .authorization {
   @include flex(space-around, center);
-  padding: 0 15px;
+  padding: 30px 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 
   &__title {
     text-align: center;

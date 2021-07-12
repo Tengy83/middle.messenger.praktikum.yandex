@@ -17,36 +17,23 @@ const pages = {
 const root = document.querySelector('#root');
 
 function renderPage(name) {
-  let template = '';
-  if (pages.hasOwnProperty(name)) {
-    template = pages[name];
-  } else {
-    template = pages['error404'];
-  }
+  const createCurrentPage = pages[name] || error404;
 
   removeClickHandlers();
 
-  root.innerHTML = template();
+  root.innerHTML = createCurrentPage();
 
   initClickHandlers();
 }
 
-const errorUrl = window.location.pathname.length;
-
-if (
-  window.location.search.toLowerCase().indexOf('error=404') >= 0 ||
-  errorUrl > 1
-) {
-  renderPage('error404');
-} else {
-  renderPage('home');
-}
+const pathname = window.location.pathname.replace('/', '');
+renderPage(pathname || 'home');
 
 function initClickHandlers() {
   const links = document.querySelectorAll('[data-page]');
 
   for (const link of links) {
-    link.addEventListener('click', pageRenderListaner);
+    link.addEventListener('click', pageRenderListener);
   }
 }
 
@@ -54,22 +41,15 @@ function removeClickHandlers() {
   const links = document.querySelectorAll('[data-page]');
 
   for (const link of links) {
-    link.removeEventListener('click', pageRenderListaner);
+    link.removeEventListener('click', pageRenderListener);
   }
 }
-function pageRenderListaner(ev) {
+function pageRenderListener(ev) {
   ev.preventDefault();
-  if (ev.target.tagName === 'A') {
+  if (ev.target.hasAttribute('data-page')) {
     renderPage(ev.target.dataset.page);
   } else {
-    let prevDom = ev.target;
-    let nextDom = prevDom.parentNode;
-    while (nextDom.tagName !== 'A' || nextDom.tagName == 'BODY') {
-      prevDom = nextDom;
-      nextDom = prevDom.parentNode;
-    }
-    if (nextDom.dataset.page) {
-      renderPage(nextDom.dataset.page);
-    }
+    const renderPageName = ev.target.closest('[data-page]').dataset.page;
+    renderPage(renderPageName);
   }
 }
