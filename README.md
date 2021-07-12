@@ -1,4 +1,4 @@
 ### Для ревьюера
-PR: https://github.com/Tengy83/middle.messenger.praktikum.yandex/pull/1
+PR: ![Ссылка на PR](https://github.com/Tengy83/middle.messenger.praktikum.yandex/pull/1)
 
-netlify: https://priceless-meninsky-e25a44.netlify.app
+netlify: ![Ссылка на netlify](https://friendlymessage.netlify.app)
