@@ -1,0 +1,11 @@
+@import '../../../../scss/mixins';
+@import '../../../../scss/variables';
+
+input {
+  width: 100%;
+  padding: 0.3rem 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid $border-grey;
+  background: transparent;
+  color: $grey-text-color;
+}

@@ -14,15 +14,10 @@
     padding: 15px;
   }
 
+  .form__forgot_pass {
+    margin-top: 20px;
+  }
   &__form {
-    width: 100%;
-    max-width: 350px;
-    padding: 25px;
-    background-color: $light-text-color;
-    border-radius: 20px;
-    @include flex(center, center);
-    flex-direction: column;
-
     .form__forgot_pass {
       margin-top: 20px;
     }

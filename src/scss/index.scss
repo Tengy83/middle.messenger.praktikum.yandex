@@ -14,15 +14,6 @@ body {
   background: $bg-body;
 }
 
-input {
-  width: 100%;
-  padding: 0.3rem 0;
-  margin-bottom: 20px;
-  border-bottom: 1px solid $border-grey;
-  background: transparent;
-  color: $grey-text-color;
-}
-
 a,
 .link {
   color: $link-color;
@@ -35,41 +26,6 @@ a,
   &:visited,
   &:active {
     color: $link-color;
-  }
-}
-
-.btn,
-button {
-  height: 44px;
-  width: 100%;
-  position: relative;
-  border-radius: 18px;
-  font-size: 1rem;
-  @include flex(center, center);
-  @include button($light-text-color, $link-color, transparent);
-}
-
-.btn-red {
-  @include button($light-text-color, $link-red, transparent);
-}
-.btn-grey {
-  color: $grey-text-color;
-  border: 1px solid $grey-text-color;
-  background: transparent;
-  height: 30px;
-
-  &:visited,
-  &:active,
-  &.active {
-    color: $grey-text-color;
-    text-decoration: none;
-  }
-
-  &:hover {
-    background: transparent;
-    text-decoration: none;
-    color: $grey-text-color;
-    cursor: pointer;
   }
 }
 
@@ -97,11 +53,17 @@ hr {
 }
 
 // Modules
-// @import url(../modules/header/header.scss);
+
+@import url(../modules/button/button.scss);
+@import url(../modules/form/form.scss);
 @import url(../modules/headerUser/headerUser.scss);
 @import url(../modules/authorization/authorization.scss);
 @import url(../modules/registration/registration.scss);
 @import url(../modules/usersList/usersList.scss);
 @import url(../modules/chatStub/chatStub.scss);
+@import url(../modules/user/user.scss);
+@import url(../modules/editUser/editUser.scss);
+@import url(../modules/changePassword/changePassword.scss);
+
 @import url(../modules/error/error.scss);
 @import url(../modules/moduleStub/moduleStub.scss);

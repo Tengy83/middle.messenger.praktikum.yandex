@@ -5,6 +5,8 @@ import { createPage as home } from './pages/home';
 import { createPage as registration } from './pages/registration';
 import { createPage as chats } from './pages/chats';
 import { createPage as user } from './pages/user';
+import { createPage as edit_user } from './pages/editUser';
+import { createPage as change_password } from './pages/changePassword';
 
 const pages = {
   error404,
@@ -12,6 +14,8 @@ const pages = {
   registration,
   chats,
   user,
+  edit_user,
+  change_password,
 };
 
 const root = document.querySelector('#root');
@@ -46,10 +50,6 @@ function removeClickHandlers() {
 }
 function pageRenderListener(ev) {
   ev.preventDefault();
-  if (ev.target.hasAttribute('data-page')) {
-    renderPage(ev.target.dataset.page);
-  } else {
-    const renderPageName = ev.target.closest('[data-page]').dataset.page;
-    renderPage(renderPageName);
-  }
+  const pageName = ev.currentTarget.dataset.page;
+  renderPage(pageName);
 }
