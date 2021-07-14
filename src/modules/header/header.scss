@@ -23,4 +23,18 @@
       margin-left: 10px;
     }
   }
+
+  &__user-link {
+    @include flex(space-between, center);
+    color: $light-text-color;
+    &:hover,
+    &:visited,
+    &:active {
+      color: $light-text-color;
+      text-decoration: none;
+    }
+    span {
+      margin: 0 8px;
+    }
+  }
 }

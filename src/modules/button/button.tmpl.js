@@ -1,11 +1,12 @@
-export function createButton(buttonState, buttonName) {
+export function createButton(buttonState, buttonName, form = false) {
+  const formLink = form ? 'form.' : '';
   const hr = buttonState['hr'] ? `<hr />` : '';
   const href = buttonState['href']
-    ? `href="{{form.buttons.${buttonName}.link}}"`
+    ? `href="{{${formLink}buttons.${buttonName}.link}}"`
     : '';
   const dataPage = buttonState['dataPage']
-    ? `data-page="{{form.buttons.${buttonName}.dataPage}}"`
+    ? `data-page="{{${formLink}buttons.${buttonName}.dataPage}}"`
     : '';
 
-  return `${hr}<{{form.buttons.${buttonName}.tag}} ${href} class="{{form.buttons.${buttonName}.className}}" ${dataPage}>{{form.buttons.${buttonName}.title}}</{{form.buttons.${buttonName}.tag}}>`;
+  return `${hr}<{{${formLink}buttons.${buttonName}.tag}} ${href} class="{{${formLink}buttons.${buttonName}.className}}" ${dataPage}>{{${formLink}buttons.${buttonName}.title}}</{{${formLink}buttons.${buttonName}.tag}}>`;
 }

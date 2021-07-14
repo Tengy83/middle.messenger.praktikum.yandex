@@ -1,11 +1,8 @@
-import { state } from './state';
-import { createForm } from '../form/form.tmpl';
-
-export function createAuthorization() {
+export function createAuthorization(form = '') {
   return `<div class="{{ className }}">
     <h1 class="{{ titleClass }}">
       {{title}}
     </h1>
-    ${createForm(state.form)}
+    ${form}
   </div>`;
 }

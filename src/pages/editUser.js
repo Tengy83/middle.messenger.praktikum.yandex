@@ -1,14 +1,12 @@
 import { state as stateHeader } from '../modules/header/state';
 import { state as stateEditUser } from '../modules/editUser/state';
 
-import { createHeader } from '../modules/header/header.tmpl';
-import { createEditUser } from '../modules/editUser/editUser.tmpl';
-
-import { returnTmpl } from '../../utils/utils';
+import { Header } from '../modules/header/Header';
+import { EditUser } from '../modules/editUser/EditUser';
 
 export function createPage() {
-  return (
-    returnTmpl(createHeader(), stateHeader) +
-    returnTmpl(createEditUser(), stateEditUser)
-  );
+  const header = new Header({ state: stateHeader });
+  const editUser = new EditUser({ state: stateEditUser });
+
+  return header.toHtml() + editUser.toHtml();
 }

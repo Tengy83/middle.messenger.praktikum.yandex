@@ -1,15 +1,12 @@
-import { state } from './state';
-import { createForm } from '../form/form.tmpl';
-
-export function createUsersList() {
+export function createUsersList(form = '') {
   return `<div class="{{ className }}">
-  ${createForm(state.form)}
+  ${form}
   <a href="{{newChatLink.link}}" class="{{newChatLink.className}}" disabled>{{newChatLink.title}}</a>
   
   <ul class="user-list">
       <li class="user-list__item user-item">
         <img
-          src="./img/user_icon.svg"
+          src="../img/user_icon.svg"
           alt=""
           class="user-item__icon"
         />
@@ -19,12 +16,12 @@ export function createUsersList() {
         >
         </div>
         <a href="#" class="small-item__delete" title="Удалить Чат"
-          ><img src="./img/menu_tres_icon.svg" alt=""
+          ><img src="../img/menu_tres_icon.svg" alt=""
         /></a>
       </li>
       <li class="user-list__item user-item">
         <img
-          src="./img/user_icon.svg"
+          src="../img/user_icon.svg"
           alt=""
           class="user-item__icon"
         />
@@ -34,12 +31,12 @@ export function createUsersList() {
         >
         </div>
         <a href="#" class="small-item__delete" title="Удалить Чат"
-          ><img src="./img/menu_tres_icon.svg" alt=""
+          ><img src="../img/menu_tres_icon.svg" alt=""
         /></a>
       </li>
       <li class="user-list__item user-item">
         <img
-          src="./img/user_icon.svg"
+          src="../img/user_icon.svg"
           alt=""
           class="user-item__icon"
         />
@@ -49,12 +46,12 @@ export function createUsersList() {
         >
         </div>
         <a href="#" class="small-item__delete" title="Удалить Чат"
-          ><img src="./img/menu_tres_icon.svg" alt=""
+          ><img src="../img/menu_tres_icon.svg" alt=""
         /></a>
       </li>
       <li class="user-list__item user-item">
         <img
-          src="./img/user_icon.svg"
+          src="../img/user_icon.svg"
           alt=""
           class="user-item__icon"
         />
@@ -64,7 +61,7 @@ export function createUsersList() {
         >
         </div>
         <a href="#" class="small-item__delete" title="Удалить Чат"
-          ><img src="./img/menu_tres_icon.svg" alt=""
+          ><img src="../img/menu_tres_icon.svg" alt=""
         /></a>
       </li>
     </ul>

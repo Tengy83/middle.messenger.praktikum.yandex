@@ -1,14 +1,12 @@
 import { state as stateHeader } from '../modules/header/state';
 import { state as stateChangePassword } from '../modules/changePassword/state';
 
-import { createHeader } from '../modules/header/header.tmpl';
-import { createChangePassword } from '../modules/changePassword/changePassword.tmpl';
-
-import { returnTmpl } from '../../utils/utils';
+import { Header } from '../modules/header/Header';
+import { ChangePassword } from '../modules/changePassword/ChangePassword';
 
 export function createPage() {
-  return (
-    returnTmpl(createHeader(), stateHeader) +
-    returnTmpl(createChangePassword(), stateChangePassword)
-  );
+  const header = new Header({ state: stateHeader });
+  const changePassword = new ChangePassword({ state: stateChangePassword });
+
+  return header.toHtml() + changePassword.toHtml();
 }

@@ -1,7 +1,4 @@
-import { createButton } from '../button/button.tmpl';
-import { state } from './state';
-
-export function createUser() {
+export function createUser(buttons) {
   return `<div class="{{ className }}">
     <img src="{{ img }}" alt="{{ title }}" />
     <h1 class="{{ titleClass }}">
@@ -26,17 +23,7 @@ export function createUser() {
       <div class="user-profile__item user-phone">
         <span class="user-phone__title">Телефон</span><span class="user-phone__content">{{ phone }}</span>
       </div>
-      ${createButtonsTmpl()}
+      ${buttons}
     </div>
   </div>`;
-}
-
-function createButtonsTmpl() {
-  let buttons = '';
-
-  Object.entries(state['form']['buttons']).forEach(function (buttonState) {
-    buttons += createButton(buttonState[1], buttonState[0]);
-  });
-  console.log(buttons);
-  return buttons;
 }

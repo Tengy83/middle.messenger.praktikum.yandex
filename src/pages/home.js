@@ -1,14 +1,12 @@
 import { state as stateHeader } from '../modules/header/state';
 import { state as stateAuthorization } from '../modules/authorization/state';
 
-import { createHeader } from '../modules/header/header.tmpl';
-import { createAuthorization } from '../modules/authorization/authorization.tmpl';
-
-import { returnTmpl } from '../../utils/utils';
+import { Header } from '../modules/header/Header';
+import { Authorization } from '../modules/authorization/Authorization';
 
 export function createPage() {
-  return (
-    returnTmpl(createHeader(), stateHeader) +
-    returnTmpl(createAuthorization(), stateAuthorization)
-  );
+  const header = new Header({ state: stateHeader });
+  const authorization = new Authorization({ state: stateAuthorization });
+
+  return header.toHtml() + authorization.toHtml();
 }

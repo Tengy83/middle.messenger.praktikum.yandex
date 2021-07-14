@@ -2,7 +2,7 @@ import { TEMPLATE_REGEXP } from '../constants';
 import { getObjValue } from './utils';
 
 export class Templator {
-  constructor(template) {
+  constructor(template = {}) {
     this._template = template;
   }
 
