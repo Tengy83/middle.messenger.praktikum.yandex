@@ -1,0 +1,38 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.btn,
+button {
+  height: 44px;
+  width: 100%;
+  position: relative;
+  border-radius: 18px;
+  font-size: 1rem;
+  padding: 10px;
+  @include flex(center, center);
+  @include button($light-text-color, $link-color, transparent);
+}
+
+.btn-red {
+  @include button($light-text-color, $link-red, transparent);
+}
+.btn-grey {
+  color: $grey-text-color;
+  border: 1px solid $grey-text-color;
+  background: transparent;
+  height: 30px;
+
+  &:visited,
+  &:active,
+  &.active {
+    color: $grey-text-color;
+    text-decoration: none;
+  }
+
+  &:hover {
+    background: transparent;
+    text-decoration: none;
+    color: $grey-text-color;
+    cursor: pointer;
+  }
+}

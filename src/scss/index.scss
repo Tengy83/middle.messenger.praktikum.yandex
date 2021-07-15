@@ -1,0 +1,69 @@
+@import 'fonts';
+@import 'variables';
+@import 'mixins';
+
+@import 'reset';
+
+html {
+  font-size: $fs;
+}
+body {
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  color: $dark-text-color;
+  background: $bg-body;
+}
+
+a,
+.link {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  &:visited,
+  &:active {
+    color: $link-color;
+  }
+}
+
+hr {
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: $border-grey;
+  margin: 20px 0;
+}
+
+#root {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: $header-height auto;
+}
+
+.messenger-wrapper {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: $chats-width auto;
+}
+
+// Modules
+
+@import url(../modules/button/button.scss);
+@import url(../modules/form/form.scss);
+@import url(../modules/header/header.scss);
+@import url(../modules/authorization/authorization.scss);
+@import url(../modules/registration/registration.scss);
+@import url(../modules/usersList/usersList.scss);
+@import url(../modules/chatStub/chatStub.scss);
+@import url(../modules/user/user.scss);
+@import url(../modules/editUser/editUser.scss);
+@import url(../modules/changePassword/changePassword.scss);
+
+@import url(../modules/error/error.scss);
+@import url(../modules/moduleStub/moduleStub.scss);

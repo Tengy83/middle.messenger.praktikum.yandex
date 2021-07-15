@@ -1,0 +1,21 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.edit-user {
+  @include flex(center, center);
+  padding: 30px 15px;
+  flex-direction: column;
+
+  &__title {
+    text-align: center;
+    font-size: 32px;
+    padding: 0 15px;
+    margin: 15px 0 25px;
+  }
+
+  &__form {
+    .form__user-link {
+      margin-top: 20px;
+    }
+  }
+}

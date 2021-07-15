@@ -1,0 +1,25 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.authorization {
+  @include flex(space-around, center);
+  padding: 30px 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+
+  &__title {
+    text-align: center;
+    font-size: 32px;
+    padding: 15px;
+  }
+
+  .form__forgot_pass {
+    margin-top: 20px;
+  }
+  &__form {
+    .form__forgot_pass {
+      margin-top: 20px;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.form {
+  width: 100%;
+  max-width: 350px;
+  position: relative;
+  @include flex(center, center);
+  flex-direction: column;
+  padding: 25px;
+  background-color: $light-text-color;
+  border-radius: 20px;
+}
+
+// Components
+@import url(./components/input/input.scss);
