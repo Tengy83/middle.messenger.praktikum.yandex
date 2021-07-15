@@ -17,3 +17,7 @@ https://www.figma.com/file/KvIpvIU4MnULKWsbn27dRT/FriendlyMessage?node-id=0%3A1
 ## Netlify
 
 https://friendlymessage.netlify.app
+
+### Для ревьюера
+
+PR: https://github.com/Tengy83/middle.messenger.praktikum.yandex/pull/1
