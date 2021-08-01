@@ -1,5 +1,5 @@
-@import '../../../../scss/mixins';
-@import '../../../../scss/variables';
+@import "../../../../scss/mixins";
+@import "../../../../scss/variables";
 
 input {
   width: 100%;
@@ -8,4 +8,9 @@ input {
   border-bottom: 1px solid $border-grey;
   background: transparent;
   color: $grey-text-color;
+}
+input:invalid,
+input.error {
+  border-bottom: 1px solid #fa243c;
+  background: rgba(250, 36, 60, 0.1);
 }
