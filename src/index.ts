@@ -1,7 +1,6 @@
 import "./scss/index.scss";
 
-import { render } from "../utils/utils";
-
+import { MessengerPage } from "./pages/MessengerPage";
 import { Error404Page } from "./pages/Error404";
 import { HomePage } from "./pages/Home";
 import { RegistrationPage } from "./pages/Registration";
@@ -11,9 +10,9 @@ import { EditUserPage } from "./pages/EditUser";
 import { ChangePasswordPage } from "./pages/ChangePassword";
 
 const root = "#root";
-let currentPage;
+let currentPage: MessengerPage;
 
-const pages = {
+const pages: Record<string, MessengerPage> = {
   error404: new Error404Page(root),
   home: new HomePage(root),
   registration: new RegistrationPage(root),
@@ -32,7 +31,6 @@ function renderPage(name: string): void {
 
   removeClickHandlers();
 
-  // render(root, createCurrentPage());
   createCurrentPage.render();
 
   currentPage = createCurrentPage;

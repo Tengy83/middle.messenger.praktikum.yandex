@@ -103,7 +103,7 @@ export class HTTPTransport {
   }
 
   private _queryStringify(data: object): string {
-    if (typeof data !== "object") {
+    if (data === null || typeof data !== "object") {
       throw new Error("Data must be object");
     }
     const queryArr = Object.entries(data);

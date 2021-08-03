@@ -1,5 +1,5 @@
-@import '../../scss/mixins';
-@import '../../scss/variables';
+@import "../../scss/mixins";
+@import "../../scss/variables";
 
 .user {
   @include flex(center, center);
@@ -23,18 +23,20 @@
     background-color: $light-text-color;
     border-radius: 20px;
 
-    &__item {
+    dl {
       width: 100%;
+      display: grid;
+      grid-template-columns: max-content auto;
+    }
+    dt,
+    dd {
       padding: 0.3rem 0;
       margin-bottom: 20px;
-      border-bottom: 1px solid #d2d2d7;
-      background: transparent;
-      color: #86868b;
-      @include flex(space-between, center);
-
-      span:first-child {
-        color: $dark-text-color;
-      }
+      border-bottom: 1px solid $border-grey;
+    }
+    dd {
+      color: $grey-text-color;
+      text-align: right;
     }
 
     .btn-red {
