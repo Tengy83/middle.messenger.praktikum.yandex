@@ -62,10 +62,10 @@ export class Form extends MessengerModule {
         regExp = "(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*]{5,}$";
         break
       case "tel":
-        regExp = "^[0-9-_\(\) +]{7,20}$";
+        regExp = "^[\+]?[0-9]{0,2}[-\s\. ]?[(]?[0-9]{3}[)]?[-\s\. ]?[0-9]{3}[-\s\. ]?[0-9]{2}[-\s\. ]?[0-9]{2}$";
         break
       case "email":
-        regExp = "^[-w.]+@([A-z0-9][-A-z0-9]+.)+[A-z]{2,4}$";
+        regExp = "^[a-zA-Z][a-zA-Z0-9]+@{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,4}$";
         break
       default:
         regExp = "^[а-яА-ЯёЁa-zA-Z0-9-_\.]{3,20}$";

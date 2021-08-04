@@ -3,5 +3,6 @@
   "rules": {
     "indentation": "tab",
     "number-leading-zero": null
-  }
+  },
+  "ignoreFiles": ["dist/*"]
 }
