@@ -1,3 +1,5 @@
+import { MessengerPage } from "../src/pages/MessengerPage";
+
 export function getObjValue(
   obj: object,
   path: string,
@@ -99,13 +101,12 @@ export function isEmpty(arg: any): boolean {
   }
 }
 
-export function render(query, component) {
+export function render(query: string, page: MessengerPage) {
   const root = document.querySelector(query);
   if (!root) {
     throw Error(`No block "${query}"`);
   }
-  root.innerHTML = "";
-  root.append(component);
+  root.append(page.render());
   return root;
 }
 
@@ -114,4 +115,8 @@ export function capitalize(string: string): string {
     return "";
   }
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function isEqual(lhs: any, rhs: any): boolean {
+  return lhs === rhs;
 }

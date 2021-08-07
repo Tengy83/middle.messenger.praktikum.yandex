@@ -3,14 +3,21 @@ import { PageOptions } from "../../utils/interfaces";
 import { MessengerModule } from "../modules/MessengerModule";
 
 export class MessengerPage {
-  root: string;
   name: string;
+  pageDOM: HTMLElement;
   componentsList: MessengerModule[];
 
   constructor(pageOptions: PageOptions) {
     this.name = pageOptions.name;
+    this.pageDOM = this.createPageDOM(this.name);
     this.componentsList = pageOptions.componentsList;
-    this.root = pageOptions.root;
+  }
+
+  createPageDOM(name: string): HTMLElement {
+    let dom = document.createElement("div");
+    dom.classList.add("page");
+    dom.classList.add(name.toLowerCase());
+    return dom;
   }
 
   createPage(): DocumentFragment {
@@ -22,17 +29,24 @@ export class MessengerPage {
     return fragment;
   }
 
-  render(): void {
-    render(this.root, this.createPage());
+  render(): HTMLElement {
+    this.pageDOM.append(this.createPage());
+
+    return this.pageDOM;
+  }
+  renderDOMListeners() {
     this.componentsList.forEach((component) => {
       this._initDOMListeners(component);
     });
   }
+
   destroy(): void {
     this.componentsList.forEach((component) => {
       component.destroy();
       this._destroyDOMListeners(component);
     });
+
+    this.pageDOM.remove();
   }
 
   _destroyDOMListeners(component): void {
@@ -52,5 +66,13 @@ export class MessengerPage {
     if (id) {
       component.initDOMListeners(component.getContent());
     }
+  }
+
+  show() {
+    this.pageDOM.style.display = "grid";
+  }
+
+  hide() {
+    this.pageDOM.style.display = "none";
   }
 }

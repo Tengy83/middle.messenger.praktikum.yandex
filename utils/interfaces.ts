@@ -10,5 +10,4 @@ export interface Options {
 export interface PageOptions {
   name: string;
   componentsList: MessengerModule[];
-  root: string;
 }

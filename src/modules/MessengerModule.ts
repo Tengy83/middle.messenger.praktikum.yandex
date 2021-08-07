@@ -127,14 +127,6 @@ export abstract class MessengerModule extends DomListener {
     return document.createElement(tagName);
   }
 
-  show() {
-    this.getContent().style.display = "block";
-  }
-
-  hide() {
-    this.getContent().style.display = "none";
-  }
-
   destroy() {
     if (this._id) {
       this.removeDOMListeners();
