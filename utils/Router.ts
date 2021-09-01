@@ -1,6 +1,12 @@
 import { Route } from "./Route";
+import { MessengerPage } from "../src/pages/MessengerPage";
+
+import { UserAPI } from "../utils/api/UserAPI";
+import { URL_LINKS } from "../constants";
 
 export class Router {
+  userAPI: UserAPI;
+
   constructor(rootQuery) {
     if (Router.__instance) {
       return Router.__instance;
@@ -12,26 +18,25 @@ export class Router {
     this._rootQuery = rootQuery;
 
     Router.__instance = this;
+
+    this.userAPI = new UserAPI();
   }
 
-  use(pathname: string, block: Block) {
-    // Вместо трёх точек напишем отдельную сущность — об этом речь пойдёт ниже
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+  use(pathname: string, view: MessengerPage) {
+    const route = new Route(pathname, view, { rootQuery: this._rootQuery });
 
     this.routes.push(route);
 
-    // Возврат this — основа паттерна "Builder" («Строитель»)
     return this;
   }
 
   start() {
-    // Реагируем на изменения в адресной строке и вызываем перерисовку
     window.onpopstate = ((event) => {
       this._onRoute(event.currentTarget.location.pathname);
     }).bind(this);
 
     window.onclick = ((event) => {
-      let pageLink = event.target.closest("a[data-page]");
+      let pageLink = event.target.closest("[data-page]");
       if (pageLink) {
         let pageUrl = pageLink.dataset.page;
 
@@ -47,6 +52,19 @@ export class Router {
     if (!route) {
       return;
     }
+
+    this.userAPI.request().then((r) => {
+      let path = document.location.pathname;
+      if (
+        r.status !== 200 &&
+        path !== URL_LINKS["home"] &&
+        path !== URL_LINKS["error404"] &&
+        path !== URL_LINKS["signUp"]
+      ) {
+        this.go(URL_LINKS["home"]);
+      }
+      return r;
+    });
 
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();

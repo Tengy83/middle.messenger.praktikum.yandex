@@ -3,5 +3,5 @@ export function createForm(
   buttons: string = "",
   id: string
 ): string {
-  return `<form action="{{form.action}}" method="{{form.method}}" class="{{form.className}}" data-id="${id}">${inputs}${buttons}</form>`;
+  return `<form action="{{form.action}}" enctype="{{form.enctype}}" method="{{form.method}}" class="{{form.className}}" data-id="${id}">${inputs}${buttons}</form>`;
 }

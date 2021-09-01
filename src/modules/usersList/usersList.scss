@@ -1,68 +1,65 @@
-@import '../../scss/mixins';
-@import '../../scss/variables';
+@import "../../scss/mixins";
+@import "../../scss/variables";
 
-.chats-list {
-  @include flex(flex-start, center);
-  padding: 25px 15px;
-  flex-direction: column;
+.user-list {
+  width: 100%;
+  margin-top: 15px;
 
-  .search__form {
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
+  .user-item {
+    position: relative;
+    @include flex(space-between, flex-start);
+    padding: 10px 0;
+    border-bottom: 1px solid $border-grey;
 
-    .btn-search {
-      width: 22px;
-      height: 22px;
-      position: absolute;
-      top: 0;
-      right: 0;
-      background: transparent;
-      border: transparent;
-      padding: 0;
-
-      span {
-        width: 22px;
-        height: 22px;
-        background: url(../../../static/img/search_icon.svg) no-repeat center;
-        display: block;
-      }
+    &:hover {
+      cursor: pointer;
     }
-  }
+    &:hover::before {
+      display: block;
+      border-left: 1px solid $dark-text-color;
+      content: "";
+      height: 37px;
+      width: 0;
+      position: absolute;
+      left: -8px;
+    }
 
-  .user-list {
-    width: 100%;
-    margin-top: 15px;
+    &__icon {
+      width: 37px;
+      height: 37px;
+      border-radius: 50%;
+    }
 
-    .user-item {
+    &__content {
       @include flex(space-between, flex-start);
-      padding: 10px 0;
-      border-bottom: 1px solid $border-grey;
+      flex-direction: column;
+      width: 100%;
+      height: 37px;
+      margin-left: 8px;
+    }
+    &__title {
+      font-size: 14px;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 160px;
+    }
+    &__text {
+      color: $grey-text-color;
+      font-size: 11px;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 160px;
+    }
 
-      &__content {
-        @include flex(space-between, flex-start);
-        flex-direction: column;
-        width: 100%;
-        height: 37px;
-        margin-left: 8px;
-      }
-      &__title {
-        font-size: 14px;
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 160px;
-      }
-      &__text {
-        color: $grey-text-color;
-        font-size: 11px;
-        width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 160px;
-      }
+    &__delete {
+      width: 15px;
+      height: 15px;
+      background: url("../../../static/img/menu_tres_icon.svg") center/contain
+        no-repeat;
     }
   }
 }

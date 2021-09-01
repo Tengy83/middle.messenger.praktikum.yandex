@@ -1,10 +1,16 @@
-@import '../../scss/mixins';
-@import '../../scss/variables';
+@import "../../scss/mixins";
+@import "../../scss/variables";
 
 .edit-user {
   @include flex(center, center);
   padding: 30px 15px;
   flex-direction: column;
+
+  & > img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+  }
 
   &__title {
     text-align: center;

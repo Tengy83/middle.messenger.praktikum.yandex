@@ -9,6 +9,7 @@ import { createButton } from "../button/button.tmpl";
 
 export class Form extends MessengerModule {
   _id: string;
+  _api: any;
 
   constructor(options: Options) {
     super({
@@ -19,6 +20,7 @@ export class Form extends MessengerModule {
     });
 
     this._id = makeUUID();
+    this._api = options.api;
   }
 
   prepare(): void {
@@ -26,12 +28,15 @@ export class Form extends MessengerModule {
   }
 
   _createResources() {
-    const { className, action, method } = this.state;
+    const { className, action, method, enctype } = this.state;
     const newElement = this._createDocumentElement("FORM");
     newElement.className = className || "form";
     newElement.setAttribute("data-id", this._id);    
     newElement.setAttribute("action", action);
     newElement.setAttribute("method", method);
+    if(enctype){
+      newElement.setAttribute("enctype", enctype);
+    }
     this.element = newElement;
   }
 
@@ -68,7 +73,7 @@ export class Form extends MessengerModule {
         regExp = "^[a-zA-Z][a-zA-Z0-9]+@{1}[a-zA-Z]{2,}[.]{1}[a-zA-Z]{2,4}$";
         break
       default:
-        regExp = "^[а-яА-ЯёЁa-zA-Z0-9-_\.]{3,20}$";
+        regExp = "^[а-яА-ЯёЁa-zA-Z0-9-_\.\;\,\"\']{1,20}$";
     }
     return regExp
   }.bind(this)
@@ -127,15 +132,16 @@ export class Form extends MessengerModule {
           input.classList.add('error')
           data[input.getAttribute("name")] = 'Not validated';
           isValidateForm = false
-        } else {
+        } else if(input.getAttribute("name") !== 'passwordRepeat'){
           data[input.getAttribute("name")] = input.value;
         }
       });
 
       if(!isValidateForm){
         console.error(`The form ${this._id} did not pass validation`)
+      } else if(this._api){
+        this._api(data)
       }
-    console.log(data);
   }
   onBlur(event: Event) {
     event.preventDefault();
@@ -153,14 +159,33 @@ export class Form extends MessengerModule {
     event.preventDefault();
     const input = event.currentTarget
     const value = input.value
-    if(value.length > 2 && this.isValidateInput(input) && input.classList.contains('error')){
+    if(value.length > 0 && this.isValidateInput(input) && input.classList.contains('error')){
       input.classList.remove('error')
       this.removeErrorMessage(input.getAttribute('name'))
     }
   }
 
   isValidateInput(input: HTMLElement):boolean{
-    return new RegExp(this.returnRegExp(input.getAttribute('type') || 'text')).test(input.value || '')
+    return input.getAttribute('type') !== "file" ?  new RegExp(this.returnRegExp(input.getAttribute('type') || 'text')).test(input.value || '') : this.isValidateFile(input)
+  }
+
+  isValidateFile(input: HTMLElement):boolean{
+    let isValidateFile = true
+    let files = input.files;
+    if(files.length !== 0) {
+      let format = files[0].name.split(".").splice(-1,1)[0];      
+      
+      switch (format){
+        case 'jpg':
+        case 'jpeg':
+        case 'gif':
+        case 'png':
+        case 'webp':
+          break
+        default: isValidateFile = false
+      }
+    }
+    return isValidateFile
   }
 
   addErrorMessage(message:string, input: HTMLElement):void{

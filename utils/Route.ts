@@ -34,7 +34,7 @@ export class Route {
 
   render() {
     if (!this._page) {
-      this._page = new this._pageComponent();
+      this._page = new this._pageComponent(this._props.rootQuery);
       render(this._props.rootQuery, this._page);
       this._page.renderDOMListeners();
       return;

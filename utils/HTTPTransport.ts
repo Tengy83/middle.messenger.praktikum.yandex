@@ -1,3 +1,5 @@
+import { HOST } from "../constants";
+
 enum METHODS {
   GET = "GET",
   POST = "POST",
@@ -11,6 +13,7 @@ type Options = {
   method: METHODS;
   timeout?: number;
   retries?: number;
+  credentials?: boolean;
 };
 
 type OptionsWithoutMethod = Omit<Options, "method">;
@@ -29,7 +32,7 @@ export class HTTPTransport {
   put(url: string, options: OptionsWithoutMethod): Promise<XMLHttpRequest> {
     return this.request(
       url,
-      { ...options, method: METHOD.PUT },
+      { ...options, method: METHODS.PUT },
       options.timeout
     );
   }
@@ -56,7 +59,7 @@ export class HTTPTransport {
     options: Options = { method: METHODS.GET },
     timeout = 5000
   ): Promise<XMLHttpRequest> {
-    const { headers = {}, data, method } = options;
+    const { headers = {}, data, method, credentials } = options;
 
     return new Promise((resolve, reject) => {
       if (!url) {
@@ -67,6 +70,8 @@ export class HTTPTransport {
         reject("No method");
         return;
       }
+
+      url = HOST + url;
       const isGet = method === METHODS.GET;
 
       if (isGet && data) {
@@ -79,6 +84,10 @@ export class HTTPTransport {
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
       });
+
+      if (credentials) {
+        xhr.withCredentials = true;
+      }
 
       xhr.onload = function () {
         if (xhr.readyState == 4) {

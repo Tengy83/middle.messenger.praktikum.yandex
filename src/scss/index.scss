@@ -58,6 +58,13 @@ hr {
   grid-template-columns: $chats-width auto;
 }
 
+.error-block {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px 0;
+}
+
 // Modules
 
 @import url(../modules/button/button.scss);
@@ -65,7 +72,9 @@ hr {
 @import url(../modules/header/header.scss);
 @import url(../modules/authorization/authorization.scss);
 @import url(../modules/registration/registration.scss);
+@import url(../modules/users/users.scss);
 @import url(../modules/usersList/usersList.scss);
+@import url(../modules/messenger/messenger.scss);
 @import url(../modules/chatStub/chatStub.scss);
 @import url(../modules/user/user.scss);
 @import url(../modules/editUser/editUser.scss);

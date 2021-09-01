@@ -1,0 +1,87 @@
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.message {
+  @include flex(space-between, center);
+  flex-direction: column;
+  background: $light-text-color;
+  padding: 30px 15px;
+  overflow: hidden;
+
+  &__title {
+    font-size: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $bg-body;
+    width: 100%;
+  }
+  &__list {
+    margin-top: 20px;
+    overflow-x: auto;
+    height: calc(100vh - 270px);
+    width: 100%;
+
+    .message-list__item {
+      width: fit-content;
+      max-width: 80%;
+      border-radius: 10px;
+      margin-bottom: 35px;
+      padding: 20px 25px;
+      font-size: 1.2rem;
+
+      .message__data {
+        width: max-content;
+        margin-left: auto;
+        color: $grey-text-color;
+        font-size: 0.8rem;
+        margin-top: 10px;
+      }
+    }
+    .message-list__item.companion {
+      background: $bg-mess-companion;
+    }
+    .message-list__item.user {
+      background: $bg-mess-user;
+      margin-left: auto;
+    }
+  }
+  &__form {
+    max-width: 100%;
+    border-top: 1px solid $bg-body;
+    padding: 38px 0 0;
+    flex-direction: row;
+    border-radius: 0;
+
+    input[type="text"] {
+      height: 50px;
+      margin: 0;
+      border-radius: 25px;
+      border: 1px solid $bg-body;
+      padding: 0.3rem 15px;
+    }
+
+    .btn {
+      width: 52px;
+      height: 50px;
+      padding: 0;
+      border-radius: 50%;
+      margin-left: 14px;
+
+      span {
+        width: 22px;
+        height: 22px;
+        background: url(../../../static/img/arrow_r_w.svg) no-repeat center;
+        display: block;
+      }
+
+      &:hover span {
+        background: url(../../../static/img/arrow_r.svg) no-repeat center;
+      }
+    }
+
+    .error-message {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+    }
+  }
+}

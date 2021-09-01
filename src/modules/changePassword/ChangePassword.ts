@@ -2,14 +2,20 @@ import { MessengerModule } from "../MessengerModule";
 import { Form } from "../form/Form";
 import { createChangePassword } from "./changePassword.tmpl";
 import { Options } from "../../../utils/interfaces";
+import { ChangePasswordAPI } from "../../../utils/api/ChangePasswordAPI";
+import { addError } from "../../../utils/utils";
 
 export class ChangePassword extends MessengerModule {
+  changePasswordAPI: ChangePasswordAPI;
+
   constructor(options: Options) {
     super({
       name: "ChangePassword",
       state: options.state,
       ...options,
     });
+
+    this.changePasswordAPI = new ChangePasswordAPI();
   }
 
   prepare(): void {
@@ -17,12 +23,26 @@ export class ChangePassword extends MessengerModule {
   }
 
   createTemplate(): void {
-    const form = new Form({ state: this.state.form });
+    const form = new Form({ state: this.state.form, api: this.api.bind(this) });
     this.addToInternalComponentsList(form);
 
     const formTmpl = form.getTemplate();
     const changePasswordTmpl = createChangePassword(formTmpl);
 
     this.setTemplate(changePasswordTmpl);
+  }
+
+  api(data): void {
+    let json = JSON.stringify(data);
+    console.log(json);
+
+    this.changePasswordAPI.update(json).then((result) => {
+      if (result.status !== 200) {
+        addError(".change-password__form", "Ошибка");
+      } else {
+        // window.location.href = URL_LINKS["user"];
+        console.log(result);
+      }
+    });
   }
 }
