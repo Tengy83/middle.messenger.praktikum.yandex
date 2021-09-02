@@ -1,5 +1,5 @@
-@import '../../scss/mixins';
-@import '../../scss/variables';
+@import "../../scss/mixins";
+@import "../../scss/variables";
 
 .form {
   width: 100%;
@@ -10,6 +10,20 @@
   padding: 25px;
   background-color: $light-text-color;
   border-radius: 20px;
+
+  label {
+    width: 100%;
+    margin-bottom: 5px;
+  }
+
+  .error-message {
+    width: 100%;
+    padding: 0 0 8px;
+
+    li {
+      padding: 6px 0;
+    }
+  }
 }
 
 // Components
