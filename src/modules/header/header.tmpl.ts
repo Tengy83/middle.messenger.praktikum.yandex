@@ -3,6 +3,5 @@ export function createHeader(userLink: string): string {
       <img src="{{ logoImgUrl }}" alt="{{ logoTxt }}" />
       <span>{{ logoTxt }}</span>
     </a>
-    ${userLink}
-    </header>`;
+    ${userLink}`;
 }

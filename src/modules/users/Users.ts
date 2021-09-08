@@ -4,14 +4,12 @@ import { MessengerModule } from "../MessengerModule";
 import { Form } from "../form/Form";
 import { UsersList } from "../usersList/UsersList";
 import { createUsers } from "./users.tmpl";
-import { UserAPI } from "../../../utils/api/UserAPI";
 import { ChatsAPI } from "../../../utils/api/ChatsAPI";
 import { ChatUsersAPI } from "../../../utils/api/ChatUsersAPI";
-import { addError } from "../../../utils/utils";
 
 const chatsAPI = new ChatsAPI();
 const сhatUsersAPI = new ChatUsersAPI();
-const userAPI = new UserAPI();
+const notChatsPage = document.location.pathname !== URL_LINKS.chats;
 
 export class Users extends MessengerModule {
   constructor(options: Options) {
@@ -30,45 +28,64 @@ export class Users extends MessengerModule {
   }
 
   createTemplate(): void {
-    const form = new Form({ state: this.state.form, api: this.api.bind(this) });
-    this.addToInternalComponentsList(form);
+    let formTmpl = "";
+    if (notChatsPage) {
+      const form = new Form({
+        state: this.state.form,
+        api: this.api.bind(this),
+      });
+      this.addToInternalComponentsList(form);
 
-    const formTmpl = form.getTemplate();
+      formTmpl = form.getTemplate();
+    }
     const usersTmpl = createUsers(formTmpl);
-
-    // const usersList = new UsersList({ state: this.state.userList });
-    // this.addToInternalComponentsList(usersList);
-
-    // const usersListTmpl = usersList.getTemplate();
-    // console.log(usersListTmpl);
-
     this.setTemplate(usersTmpl);
   }
 
   onClick(event: Event) {
     event.preventDefault();
-    this.createChat(event);
-    this.deleteChat(event);
-    this.goToChat(event);
-    this.addUsersToChat(event);
-    this.deleteUserToChat(event);
-  }
 
-  addUsersToChat(event) {
-    let input = document.querySelector(".form__input.search");
-    if (event.target.classList.contains("search_btn_span")) {
-      this.api(input.value);
+    let isCreateChat = event.target.classList.contains("new_chat_link");
+    let isDeleteChat = event.target.classList.contains("delete-chat");
+    let isGoToChat = event.target.classList.contains("chatLink");
+    let isAddUsersToChat = event.target.classList.contains("search_btn_span");
+    let isDeleteUserToChat =
+      event.target.classList.contains("user-item__delete");
+
+    switch (true) {
+      case isCreateChat:
+        this.createChat(event);
+        break;
+      case isDeleteChat:
+        let chatName = event.target.dataset.name;
+        if (confirm(`Удалить чат - ${chatName}?`)) {
+          this.deleteChatApi(event.target.dataset.id);
+        }
+
+        break;
+      case isGoToChat:
+        window.location.href = event.target.dataset.url;
+        break;
+      case isAddUsersToChat:
+        let input = document.querySelector(".form__input.search");
+        this.api(input.value);
+        break;
+      case isDeleteUserToChat:
+        this.deleteUserToChat(event);
+        break;
+      default:
     }
   }
 
   deleteUserToChat(event) {
-    if (event.target.classList.contains("user-item__delete")) {
-      let userId = event.target.dataset.id;
-      let userItem = document.querySelector(
-        `.user-list__item[data-id="${userId}"]`
-      );
-      let chatId = event.target.dataset.chat;
+    let userId = event.target.dataset.id;
+    let userItem = document.querySelector(
+      `.user-list__item[data-id="${userId}"]`
+    );
+    let chatId = event.target.dataset.chat;
+    let userName = event.target.dataset.name;
 
+    if (confirm(`Удалить ${userName} из чата?`))
       сhatUsersAPI
         .delete(`{"users": [${userId}],"chatId": ${chatId}}`)
         .then((res) => {
@@ -76,31 +93,16 @@ export class Users extends MessengerModule {
             userItem.remove();
           }
         });
-    }
   }
 
   createChat(event: Event) {
-    if (event.target.classList.contains("new_chat_link")) {
-      let chatName = prompt("Введите название чата", "");
+    let chatName = prompt("Введите название чата", "");
 
-      chatsAPI.create(`{"title": "${chatName}"}`).then((r) => {
-        if (r.status === 200) {
-          this.getChatsApi();
-        }
-      });
-    }
-  }
-
-  goToChat(event: Event) {
-    if (event.target.classList.contains("chatLink")) {
-      window.location.href = event.target.dataset.url;
-    }
-  }
-
-  deleteChat(event: Event) {
-    if (event.target.classList.contains("delete-chat")) {
-      this.deleteChatApi(event.target.dataset.id);
-    }
+    chatsAPI.create(`{"title": "${chatName}"}`).then((r) => {
+      if (r.status === 200) {
+        this.getChatsApi();
+      }
+    });
   }
 
   deleteChatApi(id) {
@@ -129,7 +131,7 @@ export class Users extends MessengerModule {
         data.forEach((chat) => {
           newChatLink.insertAdjacentHTML(
             "afterEnd",
-            `<div class="chatLink" data-id="${chat.id}" data-url="${URL_LINKS["messenger"]}?chat=${chat.id}">id:${chat.id}; ${chat.title}<span data-id="${chat.id}" class="delete delete-chat">&#10006;</div>`
+            `<div class="chatLink" data-id="${chat.id}" data-url="${URL_LINKS.messenger}?chat=${chat.id}">id:${chat.id}; ${chat.title}<span data-id="${chat.id}" data-name="${chat.title}" class="delete delete-chat">&#10006;</div>`
           );
 
           if (paramsUrl && +chatId == chat.id && messageTitle) {
@@ -160,8 +162,7 @@ export class Users extends MessengerModule {
 
           userList[user.id] = item;
         });
-
-        if (chatLink) {
+        if (chatLink && notChatsPage) {
           const usersList = new UsersList({ state: userList });
           this.addToInternalComponentsList(usersList);
 

@@ -1,4 +1,5 @@
 export const state = {
+  tagName: "header",
   className: "header",
   classLogoLinkName: "header__logo-link",
   logoLink: "",

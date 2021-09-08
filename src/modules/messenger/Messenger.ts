@@ -125,9 +125,9 @@ export class Messenger extends MessengerModule {
         .then((r) => JSON.parse(r.response))
         .then((data) => {
           if (data.length > 0) {
-            window.location.href = `${URL_LINKS["messenger"]}?chat=${data[0].id}`;
+            window.location.href = `${URL_LINKS.messenger}?chat=${data[0].id}`;
           } else {
-            window.location.href = URL_LINKS["chats"];
+            window.location.href = URL_LINKS.chats;
           }
         });
     }

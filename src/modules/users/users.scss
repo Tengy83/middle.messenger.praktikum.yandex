@@ -6,6 +6,11 @@
   padding: 25px 15px;
   flex-direction: column;
 
+  .form__title {
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
+
   .search__form {
     background: transparent;
     padding: 0;

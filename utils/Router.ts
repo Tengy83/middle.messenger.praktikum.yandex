@@ -31,21 +31,21 @@ export class Router {
   }
 
   start() {
-    window.onpopstate = ((event) => {
+    window.onpopstate = (event) => {
       this._onRoute(event.currentTarget.location.pathname);
-    }).bind(this);
+    };
 
-    window.onclick = ((event) => {
+    window.onclick = (event) => {
       let pageLink = event.target.closest("[data-page]");
       if (pageLink) {
         let pageUrl = pageLink.dataset.page;
 
         this.go(`/${pageUrl === "home" || pageUrl === "/" ? "" : pageUrl}`);
       }
-    }).bind(this);
+    };
 
     this._onRoute(window.location.pathname);
-  } // запустить роутер
+  }
 
   _onRoute(pathname) {
     const route = this.getRoute(pathname);
@@ -57,11 +57,13 @@ export class Router {
       let path = document.location.pathname;
       if (
         r.status !== 200 &&
-        path !== URL_LINKS["home"] &&
-        path !== URL_LINKS["error404"] &&
-        path !== URL_LINKS["signUp"]
+        path !== URL_LINKS.home &&
+        path !== URL_LINKS.error404 &&
+        path !== URL_LINKS.signUp
       ) {
-        this.go(URL_LINKS["home"]);
+        this.go(URL_LINKS.home);
+      } else if (r.status === 200 && path === URL_LINKS.home) {
+        this.go(URL_LINKS.chats);
       }
       return r;
     });
@@ -85,8 +87,8 @@ export class Router {
 
   back() {
     this.history.back();
-  } // переход назад по истории браузера
+  }
   forward() {
     this.history.forward();
-  } // переход вперёд по истории браузера
+  }
 }

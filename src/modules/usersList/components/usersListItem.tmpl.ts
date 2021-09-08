@@ -16,7 +16,7 @@ export function createUsersListItem(
   ><small class="user-item__text">${text}</small
   >
   </div>
-  <a href="#" class="user-item__delete" title="Удалить из Чата"
-  data-id="${id}" data-chat="${chatId}" data-action="delete"></a>
+  <a href="#" class="user-item__delete delete delete-user" title="Удалить из Чата"
+  data-id="${id}" data-chat="${chatId}" data-name="${name}" data-action="delete">✖</a>
 </li>`;
 }

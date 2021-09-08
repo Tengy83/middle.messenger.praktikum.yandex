@@ -4,6 +4,7 @@ import { createChangePassword } from "./changePassword.tmpl";
 import { Options } from "../../../utils/interfaces";
 import { ChangePasswordAPI } from "../../../utils/api/ChangePasswordAPI";
 import { addError } from "../../../utils/utils";
+import { URL_LINKS } from "../../../constants";
 
 export class ChangePassword extends MessengerModule {
   changePasswordAPI: ChangePasswordAPI;
@@ -34,14 +35,12 @@ export class ChangePassword extends MessengerModule {
 
   api(data): void {
     let json = JSON.stringify(data);
-    console.log(json);
 
     this.changePasswordAPI.update(json).then((result) => {
       if (result.status !== 200) {
         addError(".change-password__form", "Ошибка");
       } else {
-        // window.location.href = URL_LINKS["user"];
-        console.log(result);
+        window.location.href = URL_LINKS.user;
       }
     });
   }

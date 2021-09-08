@@ -1,5 +1,5 @@
 import { Options } from "../../../utils/interfaces";
-import { FILES_URL } from "../../../constants";
+import { FILES_URL, URL_LINKS } from "../../../constants";
 
 import { MessengerModule } from "../MessengerModule";
 import { Form } from "../form/Form";
@@ -45,7 +45,6 @@ export class EditUser extends MessengerModule {
       } else {
         let res = JSON.parse(result.response);
         const form = document.querySelector(".edit-user__form");
-        console.log(result.response);
         if (res.avatar) {
           document
             .querySelector(`.edit-user > img`)
@@ -97,11 +96,13 @@ export class EditUser extends MessengerModule {
             if (result.status !== 200) {
               addError(".edit-user__form", "Ошибка загрузки файла");
             } else {
-              window.location.href = URL_LINKS["user"];
+              alert("Изменения внесены");
+              window.location.href = URL_LINKS.user;
             }
           });
         } else {
-          window.location.href = URL_LINKS["user"];
+          alert("Изменения внесены");
+          window.location.href = URL_LINKS.user;
         }
       }
     });

@@ -166,7 +166,8 @@ export class Form extends MessengerModule {
   }
 
   isValidateInput(input: HTMLElement):boolean{
-    return input.getAttribute('type') !== "file" ?  new RegExp(this.returnRegExp(input.getAttribute('type') || 'text')).test(input.value || '') : this.isValidateFile(input)
+    let path = document.location.pathname;
+    return path === '/'? true : input.getAttribute('type') !== "file" ?  new RegExp(this.returnRegExp(input.getAttribute('type') || 'text')).test(input.value || '') : this.isValidateFile(input)
   }
 
   isValidateFile(input: HTMLElement):boolean{

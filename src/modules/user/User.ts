@@ -46,7 +46,7 @@ export class User extends MessengerModule {
   logoutAPI() {
     this.loginAPI.delete().then((result) => {
       if (result.status === 200) {
-        window.location.href = URL_LINKS["home"];
+        window.location.href = URL_LINKS.home;
       }
     });
   }

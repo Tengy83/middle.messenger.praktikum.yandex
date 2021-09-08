@@ -44,7 +44,7 @@ export class Authorization extends MessengerModule {
         if (result.status !== 200) {
           addError(".authorization__form", "Ошибка авторизации");
         } else {
-          window.location.href = URL_LINKS["chats"];
+          window.location.href = URL_LINKS.chats;
         }
       },
       (error) => {

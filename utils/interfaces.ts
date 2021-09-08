@@ -6,7 +6,6 @@ export interface Options {
   template?: string;
   listeners?: string[];
   internalComponentsList?: MessengerModule[];
-  globalState?: object;
   userlink?: boolean;
 }
 export interface PageOptions {

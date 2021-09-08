@@ -11,9 +11,6 @@
     padding: 10px 0;
     border-bottom: 1px solid $border-grey;
 
-    &:hover {
-      cursor: pointer;
-    }
     &:hover::before {
       display: block;
       border-left: 1px solid $dark-text-color;
@@ -56,10 +53,17 @@
     }
 
     &__delete {
-      width: 15px;
-      height: 15px;
-      background: url("../../../static/img/menu_tres_icon.svg") center/contain
-        no-repeat;
+      color: $grey-text-color;
+      position: absolute;
+      display: block;
+      right: 7px;
+      top: 7px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: none;
+        color: $dark-text-color;
+      }
     }
   }
 }

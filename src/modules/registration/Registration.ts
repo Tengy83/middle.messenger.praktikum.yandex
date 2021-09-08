@@ -49,7 +49,7 @@ export class Registration extends MessengerModule {
         if (result.status !== 200) {
           addError(".registration__form", "Ошибка регистрации");
         } else {
-          window.location.href = URL_LINKS["chats"];
+          window.location.href = URL_LINKS.chats;
         }
       },
       (error) => {
