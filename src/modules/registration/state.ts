@@ -7,18 +7,6 @@ export const state = {
     method: "post",
     className: "registration__form form",
     inputs: {
-      email: {
-        type: "email",
-        name: "email",
-        className: "form__input email",
-        label: "Почта",
-      },
-      login: {
-        type: "text",
-        name: "login",
-        className: "form__input login",
-        label: "Логин",
-      },
       firstName: {
         type: "text",
         name: "first_name",
@@ -30,6 +18,18 @@ export const state = {
         name: "second_name",
         className: "form__input second_name",
         label: "Фамилия",
+      },
+      login: {
+        type: "text",
+        name: "login",
+        className: "form__input login",
+        label: "Логин",
+      },
+      email: {
+        type: "email",
+        name: "email",
+        className: "form__input email",
+        label: "Почта",
       },
       phone: {
         type: "tel",

@@ -6,9 +6,14 @@ export interface Options {
   template?: string;
   listeners?: string[];
   internalComponentsList?: MessengerModule[];
+  userlink?: boolean;
 }
 export interface PageOptions {
   name: string;
   componentsList: MessengerModule[];
-  root: string;
+}
+
+export interface LoginRequest {
+  login: "string";
+  password: "string";
 }

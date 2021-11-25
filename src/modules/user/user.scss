@@ -6,6 +6,12 @@
   padding: 30px 15px;
   flex-direction: column;
 
+  > img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+  }
+
   &__title {
     text-align: center;
     font-size: 32px;
@@ -18,7 +24,7 @@
     max-width: 350px;
     position: relative;
     @include flex(center, center);
-    flex-direction: column;
+    flex-wrap: wrap;
     padding: 25px;
     background-color: $light-text-color;
     border-radius: 20px;
@@ -42,5 +48,10 @@
     .btn-red {
       margin-top: 20px;
     }
+  }
+
+  .logout-link {
+    margin-left: 20px;
+    color: $link-red;
   }
 }

@@ -1,15 +1,15 @@
-@import 'fonts';
-@import 'variables';
-@import 'mixins';
+@import "fonts";
+@import "variables";
+@import "mixins";
 
-@import 'reset';
+@import "reset";
 
 html {
   font-size: $fs;
 }
 body {
   font-size: 1rem;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   color: $dark-text-color;
   background: $bg-body;
 }
@@ -41,6 +41,12 @@ hr {
   position: relative;
   width: 100%;
   height: 100%;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-rows: $header-height auto;
 }
@@ -52,6 +58,13 @@ hr {
   grid-template-columns: $chats-width auto;
 }
 
+.error-block {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+  margin: 15px 0;
+}
+
 // Modules
 
 @import url(../modules/button/button.scss);
@@ -59,7 +72,9 @@ hr {
 @import url(../modules/header/header.scss);
 @import url(../modules/authorization/authorization.scss);
 @import url(../modules/registration/registration.scss);
+@import url(../modules/users/users.scss);
 @import url(../modules/usersList/usersList.scss);
+@import url(../modules/messenger/messenger.scss);
 @import url(../modules/chatStub/chatStub.scss);
 @import url(../modules/user/user.scss);
 @import url(../modules/editUser/editUser.scss);

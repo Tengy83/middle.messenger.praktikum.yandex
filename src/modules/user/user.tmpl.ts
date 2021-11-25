@@ -1,7 +1,7 @@
 export function createUser(buttons: string = ""): string {
-  return `<img src="{{ img }}" alt="{{ title }}" />
+  return `<img src="{{ avatar }}" alt="{{ first_name }}" />
     <h1 class="{{ titleClass }}">
-      {{title}}
+      {{first_name}} - id: {{id}}
     </h1>
     <div class="user-profile">
       <dl>
@@ -14,7 +14,7 @@ export function createUser(buttons: string = ""): string {
         <dt>Фамилия</dt>
         <dd>{{ second_name }}</dd>
         <dt>Имя в чате</dt>
-        <dd>{{ chat_name }}</dd>
+        <dd>{{ display_name }}</dd>
         <dt>Телефон</dt>
         <dd>{{ phone }}</dd>
       </dl>

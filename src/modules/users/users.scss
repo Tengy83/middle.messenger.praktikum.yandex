@@ -1,0 +1,56 @@
+@import "../../scss/mixins";
+@import "../../scss/variables";
+
+.chats-list {
+  @include flex(flex-start, center);
+  padding: 25px 15px;
+  flex-direction: column;
+
+  .form__title {
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
+
+  .search__form {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+
+    .btn-search {
+      width: 22px;
+      height: 22px;
+      position: absolute;
+      bottom: 22px;
+      right: 0;
+      background: transparent;
+      border: transparent;
+      padding: 0;
+
+      span {
+        width: 22px;
+        height: 22px;
+        background: url(../../../static/img/search_icon.svg) no-repeat center;
+        display: block;
+      }
+    }
+  }
+
+  .chatLink {
+    position: relative;
+    margin-top: 15px;
+    padding: 10px;
+    background: $border-grey;
+    width: 100%;
+    cursor: pointer;
+    border-top: 1px solid $light-text-color;
+
+    .delete-chat {
+      color: $link-red;
+      position: absolute;
+      display: block;
+      right: 7px;
+      top: 7px;
+      cursor: pointer;
+    }
+  }
+}
