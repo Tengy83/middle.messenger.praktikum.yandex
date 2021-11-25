@@ -1,6 +1,3 @@
-@import "../../scss/mixins";
-@import "../../scss/variables";
-
 .message {
   @include flex(space-between, center);
   flex-direction: column;
@@ -51,7 +48,7 @@
     flex-direction: row;
     border-radius: 0;
 
-    input[type="text"] {
+    input[type='text'] {
       height: 50px;
       margin: 0;
       border-radius: 25px;
@@ -69,12 +66,12 @@
       span {
         width: 22px;
         height: 22px;
-        background: url(../../../static/img/arrow_r_w.svg) no-repeat center;
+        background: url(../../static/img/arrow_r_w.svg) no-repeat center;
         display: block;
       }
 
       &:hover span {
-        background: url(../../../static/img/arrow_r.svg) no-repeat center;
+        background: url(../../static/img/arrow_r.svg) no-repeat center;
       }
     }
 

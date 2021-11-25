@@ -1,11 +1,11 @@
-import { render } from "../../utils/utils";
-import { PageOptions } from "../../utils/interfaces";
-import { MessengerModule } from "../modules/MessengerModule";
+import { render } from '../../utils/utils';
+import { PageOptions } from '../../utils/interfaces';
+import { MessengerModule } from '../modules/MessengerModule';
 
 export class MessengerPage {
   name: string;
   pageDOM: HTMLElement;
-  componentsList: MessengerModule[];
+  componentsList: object[];
 
   constructor(pageOptions: PageOptions) {
     this.name = pageOptions.name;
@@ -14,15 +14,15 @@ export class MessengerPage {
   }
 
   createPageDOM(name: string): HTMLElement {
-    let dom = document.createElement("div");
-    dom.classList.add("page");
+    let dom = document.createElement('div');
+    dom.classList.add('page');
     dom.classList.add(name.toLowerCase());
     return dom;
   }
 
   createPage(): DocumentFragment {
     let fragment = new DocumentFragment();
-    this.componentsList.forEach((component) => {
+    this.componentsList.forEach((component: any) => {
       fragment.append(component.getContent());
     });
 
@@ -41,7 +41,7 @@ export class MessengerPage {
   }
 
   destroy(): void {
-    this.componentsList.forEach((component) => {
+    this.componentsList.forEach((component: any) => {
       component.destroy();
       this._destroyDOMListeners(component);
     });
@@ -49,8 +49,8 @@ export class MessengerPage {
     this.pageDOM.remove();
   }
 
-  _destroyDOMListeners(component): void {
-    component.getInternalComponentsList().forEach((comp) => {
+  _destroyDOMListeners(component: any): void {
+    component.getInternalComponentsList().forEach((comp: any) => {
       this._destroyDOMListeners(comp);
     });
     const id = component.getId();
@@ -58,8 +58,8 @@ export class MessengerPage {
       component.destroy();
     }
   }
-  _initDOMListeners(component): void {
-    component.getInternalComponentsList().forEach((comp) => {
+  _initDOMListeners(component: any): void {
+    component.getInternalComponentsList().forEach((comp: any) => {
       this._initDOMListeners(comp);
     });
     const id = component.getId();
@@ -69,10 +69,10 @@ export class MessengerPage {
   }
 
   show() {
-    this.pageDOM.style.display = "grid";
+    this.pageDOM.style.display = 'grid';
   }
 
   hide() {
-    this.pageDOM.style.display = "none";
+    this.pageDOM.style.display = 'none';
   }
 }

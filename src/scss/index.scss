@@ -1,15 +1,15 @@
-@import "fonts";
-@import "variables";
-@import "mixins";
+@import 'fonts';
+@import 'variables';
+@import 'mixins';
 
-@import "reset";
+@import 'reset';
 
 html {
   font-size: $fs;
 }
 body {
   font-size: 1rem;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: $dark-text-color;
   background: $bg-body;
 }
@@ -69,6 +69,7 @@ hr {
 
 @import url(../modules/button/button.scss);
 @import url(../modules/form/form.scss);
+@import url(../modules/form/components/input/input.scss);
 @import url(../modules/header/header.scss);
 @import url(../modules/authorization/authorization.scss);
 @import url(../modules/registration/registration.scss);

@@ -1,6 +1,3 @@
-@import '../../scss/mixins';
-@import '../../scss/variables';
-
 .chat-block {
   @include flex(center, center);
   background: $light-text-color;

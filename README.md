@@ -18,6 +18,10 @@ https://www.figma.com/file/KvIpvIU4MnULKWsbn27dRT/FriendlyMessage?node-id=0%3A1
 
 https://friendlymessage.netlify.app
 
+## Heroku
+
+https://evening-forest-75183.herokuapp.com
+
 ### Для ревьюера
 
 PR: https://github.com/Tengy83/middle.messenger.praktikum.yandex/pull/3

@@ -1,4 +1,4 @@
 export const state = {
-  className: "chat-block",
-  text: `Добро пожаловать в<br>FriendlyMessage!`,
+  className: 'chat-block',
+  title: `Добро пожаловать в<br>FriendlyMessage!`,
 };

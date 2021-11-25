@@ -1,10 +1,10 @@
-import { HOST } from "../constants";
+import { HOST } from '../constants';
 
 enum METHODS {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  DELETE = "DELETE",
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  DELETE = 'DELETE',
 }
 
 type Options = {
@@ -16,58 +16,33 @@ type Options = {
   credentials?: boolean;
 };
 
-type OptionsWithoutMethod = Omit<Options, "method">;
+type OptionsWithoutMethod = Omit<Options, 'method'>;
 
 export class HTTPTransport {
-  get(
-    url: string,
-    options: OptionsWithoutMethod = {}
-  ): Promise<XMLHttpRequest> {
-    return this.request(
-      url,
-      { ...options, method: METHODS.GET },
-      options.timeout
-    );
+  get(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    return this.request(url, { ...options, method: METHODS.GET }, options.timeout);
   }
   put(url: string, options: OptionsWithoutMethod): Promise<XMLHttpRequest> {
-    return this.request(
-      url,
-      { ...options, method: METHODS.PUT },
-      options.timeout
-    );
+    return this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
   }
   post(url: string, options: OptionsWithoutMethod): Promise<XMLHttpRequest> {
-    return this.request(
-      url,
-      { ...options, method: METHODS.POST },
-      options.timeout
-    );
+    return this.request(url, { ...options, method: METHODS.POST }, options.timeout);
   }
-  delete(
-    url: string,
-    options: OptionsWithoutMethod = {}
-  ): Promise<XMLHttpRequest> {
-    return this.request(
-      url,
-      { ...options, method: METHODS.DELETE },
-      options.timeout
-    );
+  delete(url: string, options: OptionsWithoutMethod = {}): Promise<XMLHttpRequest> {
+    return this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
   }
 
-  request(
-    url: string,
-    options: Options = { method: METHODS.GET },
-    timeout = 5000
-  ): Promise<XMLHttpRequest> {
-    const { headers = {}, data, method, credentials } = options;
+  request(url: string, options: Options = { method: METHODS.GET }, timeout = 5000): Promise<XMLHttpRequest> {
+    const { data, method, credentials } = options;
+    const headers: any = options.headers;
 
     return new Promise((resolve, reject) => {
       if (!url) {
-        reject("No URL");
+        reject('No URL');
         return;
       }
       if (!method) {
-        reject("No method");
+        reject('No method');
         return;
       }
 
@@ -81,9 +56,11 @@ export class HTTPTransport {
       const xhr = new XMLHttpRequest();
       xhr.open(method, url);
 
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
+      if (headers) {
+        Object.keys(headers).forEach((key: string) => {
+          xhr.setRequestHeader(key, headers[key]);
+        });
+      }
 
       if (credentials) {
         xhr.withCredentials = true;
@@ -112,27 +89,22 @@ export class HTTPTransport {
   }
 
   private _queryStringify(data: object): string {
-    if (data === null || typeof data !== "object") {
-      throw new Error("Data must be object");
+    if (data === null || typeof data !== 'object') {
+      throw new Error('Data must be object');
     }
     const queryArr = Object.entries(data);
-    let query = "?";
+    let query = '?';
     queryArr.forEach((entrie, ind) => {
-      query += `${entrie[0]}=${entrie[1]}${
-        ind < queryArr.length - 1 ? "&" : ""
-      }`;
+      query += `${entrie[0]}=${entrie[1]}${ind < queryArr.length - 1 ? '&' : ''}`;
     });
     return query;
   }
 }
 
-export function fetchWithRetry(
-  url: string,
-  options: Options
-): Promise<XMLHttpRequest> {
+export function fetchWithRetry(url: string, options: Options): Promise<XMLHttpRequest> {
   const { retries = 1 } = options;
 
-  function onError(err) {
+  function onError(err: any) {
     const usedRetries = retries - 1;
     if (!usedRetries) {
       throw err;

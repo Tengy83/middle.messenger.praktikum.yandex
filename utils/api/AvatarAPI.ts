@@ -1,10 +1,10 @@
-import { BaseAPI } from "./BaseAPI";
-import { HTTPTransport as HTTP } from "../HTTPTransport";
+import { BaseAPI } from './BaseAPI';
+import { HTTPTransport as HTTP } from '../HTTPTransport';
 
 const avatarAPIInstance = new HTTP();
 export class AvatarAPI extends BaseAPI {
-  update(data) {
-    return avatarAPIInstance.put("/user/profile/avatar", {
+  update(data: FormData): Promise<XMLHttpRequest> {
+    return avatarAPIInstance.put('/user/profile/avatar', {
       data: data,
       credentials: true,
     });

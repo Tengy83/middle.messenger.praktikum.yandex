@@ -1,19 +1,18 @@
-import { MessengerModule } from "../MessengerModule";
-import { Form } from "../form/Form";
-import { createChangePassword } from "./changePassword.tmpl";
-import { Options } from "../../../utils/interfaces";
-import { ChangePasswordAPI } from "../../../utils/api/ChangePasswordAPI";
-import { addError } from "../../../utils/utils";
-import { URL_LINKS } from "../../../constants";
+import { MessengerModule } from '../MessengerModule';
+import { Form } from '../form/Form';
+import { createChangePassword } from './changePassword.tmpl';
+import { Options } from '../../../utils/interfaces';
+import { ChangePasswordAPI } from '../../../utils/api/ChangePasswordAPI';
+import { addError } from '../../../utils/utils';
+import { URL_LINKS } from '../../../constants';
 
 export class ChangePassword extends MessengerModule {
   changePasswordAPI: ChangePasswordAPI;
 
   constructor(options: Options) {
     super({
-      name: "ChangePassword",
+      name: 'ChangePassword',
       state: options.state,
-      ...options,
     });
 
     this.changePasswordAPI = new ChangePasswordAPI();
@@ -33,12 +32,12 @@ export class ChangePassword extends MessengerModule {
     this.setTemplate(changePasswordTmpl);
   }
 
-  api(data): void {
+  api(data: any): void {
     let json = JSON.stringify(data);
 
     this.changePasswordAPI.update(json).then((result) => {
       if (result.status !== 200) {
-        addError(".change-password__form", "Ошибка");
+        addError('.change-password__form', 'Ошибка');
       } else {
         window.location.href = URL_LINKS.user;
       }

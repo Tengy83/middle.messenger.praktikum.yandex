@@ -1,12 +1,12 @@
-import { BaseAPI } from "./BaseAPI";
-import { HTTPTransport as HTTP } from "../HTTPTransport";
+import { BaseAPI } from './BaseAPI';
+import { HTTPTransport as HTTP } from '../HTTPTransport';
 
 const tokenAPIInstance = new HTTP();
 export class TokenAPI extends BaseAPI {
-  request(id) {
+  request(id: string): Promise<XMLHttpRequest> {
     return tokenAPIInstance.post(`/chats/token/${id}`, {
-      headers: { "content-type": "application/json; charset=utf-8" },
-      data: "",
+      headers: { 'content-type': 'application/json; charset=utf-8' },
+      data: '',
       credentials: true,
     });
   }
