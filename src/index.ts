@@ -1,15 +1,15 @@
 import { URL_LINKS, ROOT_CONTAINER_ID } from '../constants';
 
-import { Error404Page } from './pages/Error404';
-import { Router } from '../utils/Router';
+import { Error404Page } from '@pages/Error404';
+import { Router } from '@utils/Router';
 
-import { HomePage } from './pages/Home';
-import { RegistrationPage } from './pages/Registration';
-import { ChatsPage } from './pages/Chats';
-import { UserPage } from './pages/User';
-import { EditUserPage } from './pages/EditUser';
-import { ChangePasswordPage } from './pages/ChangePassword';
-import { MessagePage } from './pages/Message';
+import { HomePage } from '@pages/Home';
+import { RegistrationPage } from '@pages/Registration';
+import { ChatsPage } from '@pages/Chats';
+import { UserPage } from '@pages/User';
+import { EditUserPage } from '@pages/EditUser';
+import { ChangePasswordPage } from '@pages/ChangePassword';
+import { MessagePage } from '@pages/Message';
 
 import './scss/index.scss';
 

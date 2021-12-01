@@ -1,11 +1,11 @@
-import { capitalize } from '../utils/utils';
+import { capitalize } from '@utils/utils';
 
 export class DomListener {
   name: string;
   id?: HTMLElement | null;
   listeners: string[] | null;
 
-  constructor(name: string = '', listeners: string[] = []) {
+  constructor(name = '', listeners: string[] = []) {
     this.name = name;
     this.listeners = listeners;
   }
@@ -13,7 +13,7 @@ export class DomListener {
   initDOMListeners(componentDOM: any) {
     const id = componentDOM.dataset.id;
     this.id = document.querySelector(`[data-id="${id}"]`);
-    let comp: any = this;
+    const comp: any = this;
     if (!this.id) {
       throw new Error(`No "id" provided for DomListener!`);
     }
@@ -30,7 +30,7 @@ export class DomListener {
   }
 
   removeDOMListeners() {
-    let comp: any = this;
+    const comp: any = this;
     if (this.listeners) {
       this.listeners.forEach((listener) => {
         const method = this.getMethodName(listener);

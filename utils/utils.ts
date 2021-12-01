@@ -1,9 +1,9 @@
-import { MessengerPage } from '../src/pages/MessengerPage';
+import { MessengerPage } from '@pages/MessengerPage';
 
 export function getObjValue(obj: object, path: string, defaultValue: object = {}): object {
   const keys = path.split('.');
   let result: any = obj;
-  for (let key of keys) {
+  for (const key of keys) {
     result = result[key];
     if (result === undefined) {
       return defaultValue;
@@ -26,7 +26,7 @@ export function first<T>(arr: T[]): T | undefined {
   return arr.length ? arr[0] : undefined;
 }
 
-export function range(start: number = 0, end: number = start, iteration: number = 1, isRight: boolean = false): number[] | undefined {
+export function range(start = 0, end: number = start, iteration = 1, isRight = false): number[] | undefined {
   const arr: any[] = [];
 
   if (isNaN(start) || isNaN(end) || isNaN(iteration)) {
@@ -55,7 +55,7 @@ export function range(start: number = 0, end: number = start, iteration: number 
   return isRight ? arr.reverse() : arr;
 }
 
-export function rangeRight(start: number, end: number = start, iteration: number = 1, isRight?: boolean): number[] | undefined {
+export function rangeRight(start: number, end: number = start, iteration = 1, isRight?: boolean): number[] | undefined {
   return range(start, end, iteration, true);
 }
 
@@ -184,7 +184,7 @@ export function cloneDeep<T extends object = object>(obj: T) {
     }
 
     if (item instanceof Array) {
-      let copy: any[] = [];
+      const copy: any[] = [];
 
       item.forEach((_, i) => (copy[i] = _cloneDeep(item[i])));
 
@@ -192,7 +192,7 @@ export function cloneDeep<T extends object = object>(obj: T) {
     }
 
     if (item instanceof Set) {
-      let copy = new Set();
+      const copy = new Set();
 
       item.forEach((v) => copy.add(_cloneDeep(v)));
 
@@ -200,7 +200,7 @@ export function cloneDeep<T extends object = object>(obj: T) {
     }
 
     if (item instanceof Map) {
-      let copy = new Map();
+      const copy = new Map();
 
       item.forEach((v, k) => copy.set(k, _cloneDeep(v)));
 
@@ -208,7 +208,7 @@ export function cloneDeep<T extends object = object>(obj: T) {
     }
 
     if (item instanceof Object) {
-      let copy: any = {};
+      const copy: any = {};
 
       Object.getOwnPropertySymbols(item).forEach((s) => (copy[s] = _cloneDeep(item[s])));
 
@@ -245,7 +245,7 @@ export function queryStringify(data: StringIndexed): string | never {
       return `${result}${queryStringify(arrayValue)}${endLine}`;
     }
 
-    if (typeof value === 'object') {
+    if (typeof value === 'object' && value !== null) {
       const objValue = Object.keys(value || {}).reduce<StringIndexed>(
         (result, objKey) => ({
           ...result,

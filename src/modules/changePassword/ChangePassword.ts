@@ -1,10 +1,10 @@
-import { MessengerModule } from '../MessengerModule';
-import { Form } from '../form/Form';
+import { MessengerModule } from '@modules/MessengerModule';
+import { Form } from '@modules/form/Form';
 import { createChangePassword } from './changePassword.tmpl';
-import { Options } from '../../../utils/interfaces';
-import { ChangePasswordAPI } from '../../../utils/api/ChangePasswordAPI';
-import { addError } from '../../../utils/utils';
-import { URL_LINKS } from '../../../constants';
+import { Options } from '@utils/interfaces';
+import { ChangePasswordAPI } from '@utils/api/ChangePasswordAPI';
+import { addError } from '@utils/utils';
+import { URL_LINKS } from '@/constants';
 
 export class ChangePassword extends MessengerModule {
   changePasswordAPI: ChangePasswordAPI;
@@ -33,7 +33,7 @@ export class ChangePassword extends MessengerModule {
   }
 
   api(data: any): void {
-    let json = JSON.stringify(data);
+    const json = JSON.stringify(data);
 
     this.changePasswordAPI.update(json).then((result) => {
       if (result.status !== 200) {

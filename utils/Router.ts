@@ -1,7 +1,7 @@
 import { Route } from './Route';
-import { MessengerPage } from '../src/pages/MessengerPage';
+import { MessengerPage } from '@pages/MessengerPage';
 
-import { UserAPI } from '../utils/api/UserAPI';
+import { UserAPI } from '@utils/api/UserAPI';
 import { URL_LINKS } from '../constants';
 
 export class Router {
@@ -37,14 +37,14 @@ export class Router {
 
   start() {
     window.onpopstate = (event) => {
-      let currentTarget: any = <HTMLInputElement>event.currentTarget;
+      const currentTarget: any = <HTMLInputElement>event.currentTarget;
       this._onRoute(currentTarget.location.pathname);
     };
 
     window.onclick = (event) => {
-      let pageLink = (<HTMLInputElement>event.target).closest('[data-page]');
+      const pageLink = (<HTMLInputElement>event.target).closest('[data-page]');
       if (pageLink) {
-        let pageUrl = pageLink.getAttribute('data-page');
+        const pageUrl = pageLink.getAttribute('data-page');
 
         this.go(`/${pageUrl === 'home' || pageUrl === '/' ? '' : pageUrl}`);
       }
@@ -61,7 +61,7 @@ export class Router {
 
     if (this.userAPI) {
       this.userAPI.request().then((r) => {
-        let path = document.location.pathname;
+        const path = document.location.pathname;
         if (r.status !== 200 && path !== URL_LINKS.home && path !== URL_LINKS.error404 && path !== URL_LINKS.signUp) {
           this.go(URL_LINKS.home);
         } else if (r.status === 200 && path === URL_LINKS.home) {

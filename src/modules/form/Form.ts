@@ -1,11 +1,11 @@
-import { Options } from '../../../utils/interfaces';
+import { Options } from '@utils/interfaces';
 import { v4 as makeUUID } from 'uuid';
 
-import { MessengerModule } from '../MessengerModule';
+import { MessengerModule } from '@modules/MessengerModule';
 
 import { createForm } from './form.tmpl';
 import { createInput } from './components/input/input.tmpl';
-import { createButton } from '../button/button.tmpl';
+import { createButton } from '@modules/button/button.tmpl';
 
 export class Form extends MessengerModule {
   _id: string;
@@ -48,7 +48,7 @@ export class Form extends MessengerModule {
 
   createComponentsTmpl(stateComponents: any, createComponentTmpl: any): string {
     return Object.entries(stateComponents).reduce(function (tmpl, compState) {
-      let cState: any = compState[1];
+      const cState: any = compState[1];
       return tmpl + createComponentTmpl(compState[0], 'label' in cState, 'placeholder' in cState, 'value' in cState);
     }, '');
   }
@@ -71,7 +71,7 @@ export class Form extends MessengerModule {
     return regExp;
   }
 
-  getErrorText(inputType: string = '', inputName: string = ''): string {
+  getErrorText(inputType = '', inputName = ''): string {
     let errorText = '';
     let inputN = '';
     switch (inputName) {
@@ -117,9 +117,9 @@ export class Form extends MessengerModule {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    let data: any = {};
+    const data: any = {};
     let isValidateForm = true;
-    let target: any = <HTMLInputElement>event.target;
+    const target: any = <HTMLInputElement>event.target;
 
     Array.from(target.elements)
       .filter((element: any) => element.tagName === 'INPUT')
@@ -162,7 +162,7 @@ export class Form extends MessengerModule {
   }
 
   isValidateInput(input: any): boolean {
-    let path = document.location.pathname;
+    const path = document.location.pathname;
     return path === '/'
       ? true
       : input.getAttribute('type') !== 'file'
@@ -172,9 +172,9 @@ export class Form extends MessengerModule {
 
   isValidateFile(input: any): boolean {
     let isValidateFile = true;
-    let files = input.files;
+    const files = input.files;
     if (files.length !== 0) {
-      let format = files[0].name.split('.').splice(-1, 1)[0];
+      const format = files[0].name.split('.').splice(-1, 1)[0];
 
       switch (format) {
         case 'jpg':
@@ -193,7 +193,7 @@ export class Form extends MessengerModule {
   addErrorMessage(message: string, input: HTMLElement): void {
     const errorMessage = document.querySelector(`.error-message[data-input="${input.getAttribute('name')}"]`);
     if (!errorMessage) {
-      let error = document.createElement('div');
+      const error = document.createElement('div');
       error.className = 'error-message';
       error.style.color = 'red';
       error.innerHTML = message;
@@ -202,7 +202,7 @@ export class Form extends MessengerModule {
     }
   }
   removeErrorMessage(inputName: string): void {
-    let classError = inputName ? `.error-message[data-input="${inputName}"]` : `.error-message`;
+    const classError = inputName ? `.error-message[data-input="${inputName}"]` : `.error-message`;
     const errorMessage = document.querySelector(classError);
     if (errorMessage) {
       errorMessage.remove();
@@ -210,7 +210,7 @@ export class Form extends MessengerModule {
   }
 
   initDOMListeners(componentDOM: any) {
-    let comp: any = this;
+    const comp: any = this;
     const id = componentDOM.dataset.id;
     this.id = document.querySelector(`[data-id="${id}"]`);
     if (!this.id) {
@@ -234,7 +234,7 @@ export class Form extends MessengerModule {
     }
   }
   removeDOMListeners() {
-    let comp: any = this;
+    const comp: any = this;
     if (this.listeners) {
       this.listeners.forEach((listener) => {
         const method = this.getMethodName(listener);

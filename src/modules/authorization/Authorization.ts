@@ -1,12 +1,12 @@
-import { URL_LINKS } from '../../../constants';
+import { URL_LINKS } from '@/constants';
 
-import { MessengerModule } from '../MessengerModule';
-import { Form } from '../form/Form';
+import { MessengerModule } from '@modules/MessengerModule';
+import { Form } from '@modules/form/Form';
 import { createAuthorization } from './authorization.tmpl';
-import { Options, LoginRequest } from '../../../utils/interfaces';
-import { LoginAPI } from '../../../utils/api/LoginAPI';
-import { UserAPI } from '../../../utils/api/UserAPI';
-import { addError } from '../../../utils/utils';
+import { Options, LoginRequest } from '@utils/interfaces';
+import { LoginAPI } from '@utils/api/LoginAPI';
+import { UserAPI } from '@utils/api/UserAPI';
+import { addError } from '@utils/utils';
 
 export class Authorization extends MessengerModule {
   authAPI: LoginAPI;

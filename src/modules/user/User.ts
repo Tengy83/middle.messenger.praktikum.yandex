@@ -1,13 +1,13 @@
-import { Options } from '../../../utils/interfaces';
+import { Options } from '@utils/interfaces';
 
-import { FILES_URL, URL_LINKS } from '../../../constants';
-import { MessengerModule } from '../MessengerModule';
+import { FILES_URL, URL_LINKS } from '@/constants';
+import { MessengerModule } from '@modules/MessengerModule';
 
 import { createUser } from './user.tmpl';
-import { createButton } from '../button/button.tmpl';
-import { UserAPI } from '../../../utils/api/UserAPI';
-import { LoginAPI } from '../../../utils/api/LoginAPI';
-import { addError } from '../../../utils/utils';
+import { createButton } from '@modules/button/button.tmpl';
+import { UserAPI } from '@utils/api/UserAPI';
+import { LoginAPI } from '@utils/api/LoginAPI';
+import { addError } from '@utils/utils';
 
 export class User extends MessengerModule {
   loginAPI: LoginAPI;

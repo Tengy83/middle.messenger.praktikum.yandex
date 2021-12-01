@@ -1,9 +1,9 @@
-import { Options } from '../../../utils/interfaces';
+import { Options } from '@utils/interfaces';
 
-import { MessengerModule } from '../MessengerModule';
+import { MessengerModule } from '@modules/MessengerModule';
 import { createHeader } from './header.tmpl';
 import { createUserLink } from './components/userLink.tmpl';
-import { UserAPI } from '../../../utils/api/UserAPI';
+import { UserAPI } from '@utils/api/UserAPI';
 
 export class Header extends MessengerModule {
   userAPI?: UserAPI;
@@ -46,7 +46,7 @@ export class Header extends MessengerModule {
           this.state.first_name = data.first_name;
         }
 
-        let span = document.querySelector('.header__user-link span');
+        const span = document.querySelector('.header__user-link span');
         if (span) {
           span.textContent = this.state.first_name;
         }

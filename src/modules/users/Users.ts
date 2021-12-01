@@ -1,11 +1,11 @@
-import { Options } from '../../../utils/interfaces';
-import { URL_LINKS, FILES_URL } from '../../../constants';
-import { MessengerModule } from '../MessengerModule';
-import { Form } from '../form/Form';
-import { UsersList } from '../usersList/UsersList';
+import { Options } from '@utils/interfaces';
+import { URL_LINKS, FILES_URL } from '@/constants';
+import { MessengerModule } from '@modules/MessengerModule';
+import { Form } from '@modules/form/Form';
+import { UsersList } from '@modules/usersList/UsersList';
 import { createUsers } from './users.tmpl';
-import { ChatsAPI } from '../../../utils/api/ChatsAPI';
-import { ChatUsersAPI } from '../../../utils/api/ChatUsersAPI';
+import { ChatsAPI } from '@utils/api/ChatsAPI';
+import { ChatUsersAPI } from '@utils/api/ChatUsersAPI';
 
 const chatsAPI = new ChatsAPI();
 const сhatUsersAPI = new ChatUsersAPI();
@@ -44,18 +44,18 @@ export class Users extends MessengerModule {
   onClick(event: Event) {
     event.preventDefault();
 
-    let isCreateChat = (<HTMLInputElement>event.target).classList.contains('new_chat_link');
-    let isDeleteChat = (<HTMLInputElement>event.target).classList.contains('delete-chat');
-    let isGoToChat = (<HTMLInputElement>event.target).classList.contains('chatLink');
-    let isAddUsersToChat = (<HTMLInputElement>event.target).classList.contains('search_btn_span');
-    let isDeleteUserToChat = (<HTMLInputElement>event.target).classList.contains('user-item__delete');
+    const isCreateChat = (<HTMLInputElement>event.target).classList.contains('new_chat_link');
+    const isDeleteChat = (<HTMLInputElement>event.target).classList.contains('delete-chat');
+    const isGoToChat = (<HTMLInputElement>event.target).classList.contains('chatLink');
+    const isAddUsersToChat = (<HTMLInputElement>event.target).classList.contains('search_btn_span');
+    const isDeleteUserToChat = (<HTMLInputElement>event.target).classList.contains('user-item__delete');
 
     switch (true) {
       case isCreateChat:
         this.createChat(event);
         break;
       case isDeleteChat:
-        let chatName = (<HTMLInputElement>event.target).dataset.name;
+        const chatName = (<HTMLInputElement>event.target).dataset.name;
         if (confirm(`Удалить чат - ${chatName}?`)) {
           this.deleteChatApi((<HTMLInputElement>event.target).dataset.id);
         }
@@ -65,7 +65,7 @@ export class Users extends MessengerModule {
         window.location.href = (<HTMLInputElement>event.target).dataset.url || URL_LINKS.chats;
         break;
       case isAddUsersToChat:
-        let input: any = document.querySelector('.form__input.search');
+        const input: any = document.querySelector('.form__input.search');
         if (input) {
           this.api(input.value);
         }
@@ -78,10 +78,10 @@ export class Users extends MessengerModule {
   }
 
   deleteUserToChat(event: Event) {
-    let userId = (<HTMLInputElement>event.target).dataset.id;
-    let userItem = document.querySelector(`.user-list__item[data-id="${userId}"]`);
-    let chatId = (<HTMLInputElement>event.target).dataset.chat;
-    let userName = (<HTMLInputElement>event.target).dataset.name;
+    const userId = (<HTMLInputElement>event.target).dataset.id;
+    const userItem = document.querySelector(`.user-list__item[data-id="${userId}"]`);
+    const chatId = (<HTMLInputElement>event.target).dataset.chat;
+    const userName = (<HTMLInputElement>event.target).dataset.name;
 
     if (confirm(`Удалить ${userName} из чата?`))
       сhatUsersAPI.delete(`{"users": [${userId}],"chatId": ${chatId}}`).then((res) => {
@@ -92,7 +92,7 @@ export class Users extends MessengerModule {
   }
 
   createChat(event: Event) {
-    let chatName = prompt('Введите название чата', '');
+    const chatName = prompt('Введите название чата', '');
 
     chatsAPI.create(`{"title": "${chatName}"}`).then((r) => {
       if (r.status === 200) {
@@ -104,7 +104,7 @@ export class Users extends MessengerModule {
   deleteChatApi(id: any) {
     chatsAPI.delete(`{"chatId": ${id}}`).then((r) => {
       if (r.status === 200) {
-        let chatLink = document.querySelector(`.chatLink[data-id="${id}"]`);
+        const chatLink = document.querySelector(`.chatLink[data-id="${id}"]`);
         if (chatLink) {
           chatLink.remove();
         }
@@ -117,9 +117,9 @@ export class Users extends MessengerModule {
       .request()
       .then((r) => JSON.parse(r.response))
       .then((data) => {
-        let newChatLink = document.querySelector('.new_chat_link');
-        let messageTitle = document.querySelector('.message__title');
-        let paramsUrl = document.location.search;
+        const newChatLink = document.querySelector('.new_chat_link');
+        const messageTitle = document.querySelector('.message__title');
+        const paramsUrl = document.location.search;
         let chatId: any;
         if (paramsUrl) {
           chatId = new URLSearchParams(paramsUrl).get('chat');
@@ -142,14 +142,14 @@ export class Users extends MessengerModule {
   }
 
   getChatUsersAPI(chatId: any) {
-    let chatLink = document.querySelector(`.chatLink[data-id="${chatId}"]`);
+    const chatLink = document.querySelector(`.chatLink[data-id="${chatId}"]`);
     сhatUsersAPI
       .request(chatId)
       .then((r) => JSON.parse(r.response))
       .then((data) => {
-        let userList: any = {};
+        const userList: any = {};
         data.forEach((user: any) => {
-          let item: any = {};
+          const item: any = {};
           item.chatId = chatId;
           item.id = user.id;
           item.imgUrl = user.avatar ? FILES_URL + user.avatar : '../img/user_icon.svg';
@@ -169,12 +169,12 @@ export class Users extends MessengerModule {
   }
 
   api(data: string): void {
-    let arrData = data.trim().split(';');
+    const arrData = data.trim().split(';');
     if (arrData.length < 2) {
       return;
     }
-    let userId = +arrData[0].trim();
-    let chatId = +arrData[1].trim();
+    const userId = +arrData[0].trim();
+    const chatId = +arrData[1].trim();
 
     if (typeof userId === 'number' && typeof chatId === 'number') {
       сhatUsersAPI.create(`{"users": [${userId}],"chatId": ${chatId}}`).then((res) => {

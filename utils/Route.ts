@@ -1,6 +1,6 @@
-import { MessengerPage } from '../src/pages/MessengerPage';
-import { isEqual } from '../utils/utils';
-import { render } from '../utils/utils';
+import { MessengerPage } from '@pages/MessengerPage';
+import { isEqual } from '@utils/utils';
+import { render } from '@utils/utils';
 
 export class Route {
   _pathname: any;

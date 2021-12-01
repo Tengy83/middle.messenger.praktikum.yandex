@@ -1,7 +1,7 @@
-import { Options } from '../../../utils/interfaces';
+import { Options } from '@utils/interfaces';
 import { v4 as makeUUID } from 'uuid';
 
-import { MessengerModule } from '../MessengerModule';
+import { MessengerModule } from '@modules/MessengerModule';
 import { createUsersList } from './usersList.tmpl';
 import { createUsersListItem } from './components/usersListItem.tmpl';
 
@@ -40,7 +40,7 @@ export class UsersList extends MessengerModule {
 
   createComponentsTmpl(stateComponents: any, createComponentTmpl: any): string {
     return Object.entries(stateComponents).reduce(function (tmpl, compState) {
-      let cState: any = compState[1];
+      const cState: any = compState[1];
       return tmpl + createComponentTmpl(cState.chatId, cState.id, cState.imgUrl, cState.name, cState.text);
     }, '');
   }

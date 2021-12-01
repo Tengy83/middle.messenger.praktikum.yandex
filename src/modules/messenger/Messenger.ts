@@ -1,11 +1,11 @@
-import { MessengerModule } from '../MessengerModule';
-import { Form } from '../form/Form';
+import { MessengerModule } from '@modules/MessengerModule';
+import { Form } from '@modules/form/Form';
 import { createMessenger } from './messenger.tmpl';
-import { Options } from '../../../utils/interfaces';
-import { URL_LINKS } from '../../../constants';
-import { TokenAPI } from '../../../utils/api/TokenAPI';
-import { ChatsAPI } from '../../../utils/api/ChatsAPI';
-import { UserAPI } from '../../../utils/api/UserAPI';
+import { Options } from '@utils/interfaces';
+import { URL_LINKS } from '@/constants';
+import { TokenAPI } from '@utils/api/TokenAPI';
+import { ChatsAPI } from '@utils/api/ChatsAPI';
+import { UserAPI } from '@utils/api/UserAPI';
 
 const tokenAPI = new TokenAPI();
 const chatsAPI = new ChatsAPI();
@@ -38,7 +38,7 @@ export class Messenger extends MessengerModule {
   }
 
   api(data: any) {
-    let messageInput: any = document.querySelector('.message__input');
+    const messageInput: any = document.querySelector('.message__input');
     messageInput.value = '';
 
     if (this._socket)
@@ -50,7 +50,7 @@ export class Messenger extends MessengerModule {
       );
   }
 
-  listItem(message: string = '', time: string = '', className: string = 'companion') {
+  listItem(message = '', time = '', className = 'companion') {
     return `<li class="${className} message-list__item">
     <div class="message__content">${message}</div>
     <div class="message__data">${time}</div>
@@ -58,7 +58,7 @@ export class Messenger extends MessengerModule {
   }
 
   getTokenAPI() {
-    let paramsUrl = document.location.search;
+    const paramsUrl = document.location.search;
     let chatId = '';
     if (paramsUrl) {
       chatId = new URLSearchParams(paramsUrl).get('chat') || '';
@@ -99,7 +99,7 @@ export class Messenger extends MessengerModule {
 
               const listMessages = document.querySelector('.message__list');
               this._socket.addEventListener('message', (event) => {
-                let messageData = JSON.parse(event.data);
+                const messageData = JSON.parse(event.data);
 
                 if (messageData.type === 'message') {
                   this.message(listMessages, messageData, data.id);
@@ -130,7 +130,7 @@ export class Messenger extends MessengerModule {
   }
 
   message(listMessages: any, messageData: any, userId: any) {
-    let time = new Date(messageData.time).toLocaleTimeString().slice(0, -3);
+    const time = new Date(messageData.time).toLocaleTimeString().slice(0, -3);
 
     listMessages.insertAdjacentHTML(
       'beforeEnd',

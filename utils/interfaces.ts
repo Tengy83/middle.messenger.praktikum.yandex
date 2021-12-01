@@ -1,5 +1,5 @@
-import { Form } from '../src/modules/form/Form';
-import { MessengerModule } from '../src/modules/MessengerModule';
+import { Form } from '@modules/form/Form';
+import { MessengerModule } from '@modules/MessengerModule';
 
 export interface Options {
   name?: string;

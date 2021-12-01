@@ -1,11 +1,11 @@
-import { Options } from '../../../utils/interfaces';
-import { URL_LINKS } from '../../../constants';
+import { Options } from '@utils/interfaces';
+import { URL_LINKS } from '@/constants';
 
-import { MessengerModule } from '../MessengerModule';
-import { Form } from '../form/Form';
+import { MessengerModule } from '@modules/MessengerModule';
+import { Form } from '@modules/form/Form';
 import { createRegistration } from './registration.tmpl';
-import { LoginAPI } from '../../../utils/api/LoginAPI';
-import { addError } from '../../../utils/utils';
+import { LoginAPI } from '@utils/api/LoginAPI';
+import { addError } from '@utils/utils';
 
 type RegistrtionRequest = {
   first_name: 'string';

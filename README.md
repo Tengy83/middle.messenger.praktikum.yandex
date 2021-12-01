@@ -20,7 +20,7 @@ https://friendlymessage.netlify.app
 
 ## Heroku
 
-https://evening-forest-75183.herokuapp.com
+https://friendlymessage.herokuapp.com
 
 ### Для ревьюера
 

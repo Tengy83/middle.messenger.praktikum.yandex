@@ -1,6 +1,6 @@
-import { render } from '../../utils/utils';
-import { PageOptions } from '../../utils/interfaces';
-import { MessengerModule } from '../modules/MessengerModule';
+import { render } from '@utils/utils';
+import { PageOptions } from '@utils/interfaces';
+import { MessengerModule } from '@modules/MessengerModule';
 
 export class MessengerPage {
   name: string;
@@ -14,14 +14,14 @@ export class MessengerPage {
   }
 
   createPageDOM(name: string): HTMLElement {
-    let dom = document.createElement('div');
+    const dom = document.createElement('div');
     dom.classList.add('page');
     dom.classList.add(name.toLowerCase());
     return dom;
   }
 
   createPage(): DocumentFragment {
-    let fragment = new DocumentFragment();
+    const fragment = new DocumentFragment();
     this.componentsList.forEach((component: any) => {
       fragment.append(component.getContent());
     });

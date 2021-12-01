@@ -1,8 +1,8 @@
-import { Options } from '../../utils/interfaces';
+import { Options } from '@utils/interfaces';
 import { v4 as makeUUID } from 'uuid';
-import { Templator } from '../../utils/Templator';
-import { EventBus } from '../../utils/EventBus';
-import { DomListener } from '../../utils/DomListener';
+import { Templator } from '@utils/Templator';
+import { EventBus } from '@utils/EventBus';
+import { DomListener } from '@utils/DomListener';
 
 enum EVENTS {
   INIT = 'init',
