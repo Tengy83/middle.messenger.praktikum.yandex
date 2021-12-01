@@ -1,35 +1,34 @@
-import { Options } from "../../../utils/interfaces";
+import { Options } from '@utils/interfaces';
 
-import { MessengerModule } from "../MessengerModule";
-import { createHeader } from "./header.tmpl";
-import { createUserLink } from "./components/userLink.tmpl";
-import { UserAPI } from "../../../utils/api/UserAPI";
+import { MessengerModule } from '@modules/MessengerModule';
+import { createHeader } from './header.tmpl';
+import { createUserLink } from './components/userLink.tmpl';
+import { UserAPI } from '@utils/api/UserAPI';
 
 export class Header extends MessengerModule {
-  userAPI: UserAPI;
+  userAPI?: UserAPI;
 
   constructor(options: Options) {
     super({
-      name: "Header",
+      name: 'Header',
       state: options.state,
-      ...options,
     });
 
-    if ("userLink" in this.state) {
+    if ('userLink' in this.state) {
       this.userAPI = new UserAPI();
     }
   }
   prepare(): void {
     this.createTemplate();
 
-    if ("userLink" in this.state) {
+    if ('userLink' in this.state) {
       this.api();
     }
   }
 
   createTemplate(): void {
-    let userLinktmpl = "";
-    if ("userLink" in this.state) {
+    let userLinktmpl = '';
+    if ('userLink' in this.state) {
       userLinktmpl = createUserLink();
     }
 
@@ -47,7 +46,7 @@ export class Header extends MessengerModule {
           this.state.first_name = data.first_name;
         }
 
-        let span = document.querySelector(".header__user-link span");
+        const span = document.querySelector('.header__user-link span');
         if (span) {
           span.textContent = this.state.first_name;
         }

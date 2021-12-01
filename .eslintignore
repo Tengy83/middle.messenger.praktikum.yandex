@@ -1,3 +1,11 @@
 /dist
-**/*.min.js
+/coverage
+/tmp
 /node_modules
+/nginx
+/.vscode
+/.idea
+/assets/fonts
+k8s/*
+package-lock.json
+package.json

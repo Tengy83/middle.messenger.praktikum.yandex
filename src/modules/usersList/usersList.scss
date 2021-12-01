@@ -1,6 +1,3 @@
-@import "../../scss/mixins";
-@import "../../scss/variables";
-
 .user-list {
   width: 100%;
   margin-top: 15px;
@@ -14,7 +11,7 @@
     &:hover::before {
       display: block;
       border-left: 1px solid $dark-text-color;
-      content: "";
+      content: '';
       height: 37px;
       width: 0;
       position: absolute;

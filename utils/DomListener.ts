@@ -1,42 +1,45 @@
-import { capitalize } from "../utils/utils";
+import { capitalize } from '@utils/utils';
 
 export class DomListener {
   name: string;
-  id: HTMLElement | null;
+  id?: HTMLElement | null;
   listeners: string[] | null;
 
-  constructor(name = "", listeners = []) {
+  constructor(name = '', listeners: string[] = []) {
     this.name = name;
     this.listeners = listeners;
   }
 
-  initDOMListeners(componentDOM) {
+  initDOMListeners(componentDOM: any) {
     const id = componentDOM.dataset.id;
     this.id = document.querySelector(`[data-id="${id}"]`);
+    const comp: any = this;
     if (!this.id) {
       throw new Error(`No "id" provided for DomListener!`);
     }
-    this.listeners.forEach((listener) => {
-      const method = this.getMethodName(listener);
-      if (!this[method]) {
-        throw new Error(
-          `Method ${method} is not implemented in ${this.name} Component`
-        );
-      }
-      this[method] = this[method].bind(this);
-      this.id.addEventListener(listener, this[method]);
-    });
+    if (this.listeners) {
+      this.listeners.forEach((listener) => {
+        const method = this.getMethodName(listener);
+        if (!comp[method]) {
+          throw new Error(`Method ${method} is not implemented in ${this.name} Component`);
+        }
+        comp[method] = comp[method].bind(this);
+        if (this.id) this.id.addEventListener(listener, comp[method]);
+      });
+    }
   }
 
   removeDOMListeners() {
-    this.listeners.forEach((listener) => {
-      const method = this.getMethodName(listener);
-      this.id.removeEventListener(listener, this[method]);
-    });
+    const comp: any = this;
+    if (this.listeners) {
+      this.listeners.forEach((listener) => {
+        const method = this.getMethodName(listener);
+        if (this.id) this.id.removeEventListener(listener, comp[method]);
+      });
+    }
   }
 
-  // input => onInput
   getMethodName(eventName: string): string {
-    return "on" + capitalize(eventName);
+    return 'on' + capitalize(eventName);
   }
 }

@@ -18,20 +18,17 @@ export class Templator {
 
   _compileTemplate(ctx: object): string {
     let tmpl: string = this._template;
-    let key: string[] = [];
+    let key: RegExpExecArray | null;
     const regExp = TEMPLATE_REGEXP;
 
     while ((key = regExp.exec(tmpl))) {
       if (key[1]) {
         const tmplValue = key[1].trim();
-        const data = getObjValue(ctx, tmplValue);
+        const data: any = getObjValue(ctx, tmplValue);
 
         if (typeof data === 'function') {
-          window[tmplValue] = data;
-          tmpl = tmpl.replace(
-            new RegExp(key[0], 'gi'),
-            `window.${key[1].trim()}()`
-          );
+          (window as { [key: string]: any })[tmplValue] = data;
+          tmpl = tmpl.replace(new RegExp(key[0], 'gi'), `window.${key[1].trim()}()`);
           continue;
         }
 

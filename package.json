@@ -2,11 +2,15 @@
   "name": "friendlymessage",
   "version": "1.0.0",
   "description": "Messenger",
-  "main": "./index.js",
+  "main": "./src/index.ts",
   "scripts": {
-    "dev": "parcel ./static/index.html",
-    "build": "parcel build ./static/index.html --no-source-maps --no-cache",
-    "start": "parcel ./static/index.html --port 3000 && node ./server.ts"
+    "start": "cross-env NODE_ENV=development webpack serve",
+    "build": "cross-env NODE_ENV=production webpack",
+    "build-dev": "webpack",
+    "docker-build": "docker build -t messenger .",
+    "docker": "docker run -it --rm -p 3000:3000 messenger",
+    "eslint": "eslint --cache --ext .js,.jsx,.ts,.tsx src",
+    "eslint:dump": "eslint --print-config ./.eslintrc.json"
   },
   "repository": {
     "type": "git",
@@ -17,38 +21,51 @@
   ],
   "author": "Evgenii Mizerovskii",
   "license": "ISC",
-  "devDependencies": {
-    "@types/chai": "^4.2.21",
-    "@types/mocha": "^9.0.0",
-    "chai": "^4.3.4",
-    "eslint": "^7.32.0",
-    "eslint-config-google": "^0.14.0",
-    "express": "^4.17.1",
-    "mocha": "^9.1.1",
-    "parcel-bundler": "^1.12.5",
-    "parcel-plugin-clean-easy": "^1.0.2",
-    "parcel-plugin-static-files-copy": "^2.6.0",
-    "sass": "^1.35.1",
-    "stylelint": "^13.13.1",
-    "stylelint-config-sass-guidelines": "^8.0.0",
-    "typescript": "^4.3.5"
-  },
   "engines": {
     "node": "14.17.0"
   },
-  "dependencies": {
-    "core-js": "^3.15.2"
-  },
-  "parcelCleanPaths": [
-    ".cache",
-    "dist"
+  "browserslist": [
+    "defaults"
   ],
-  "staticFiles": {
-    "staticPath": [
-      {
-        "staticPath": "static/img/",
-        "staticOutDir": "/img/"
-      }
-    ]
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@types/node": "^16.9.1",
+    "@types/uuid": "^8.3.1",
+    "@types/webpack": "^5.28.0",
+    "babel-loader": "^8.2.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "concurrently": "^6.2.1",
+    "copy-webpack-plugin": "^9.0.1",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.2.0",
+    "cssnano": "^5.0.8",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.2",
+    "mini-css-extract-plugin": "^2.2.2",
+    "node-sass": "^6.0.1",
+    "nodemon": "^2.0.12",
+    "postcss": "^8.3.6",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^14.0.2",
+    "postcss-loader": "^6.1.1",
+    "prettier": "^2.4.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1",
+    "sugarss": "^4.0.1",
+    "ts-loader": "^9.2.5",
+    "ts-node": "^10.2.1",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "typescript": "^4.4.2",
+    "uuid": "^8.3.2",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-dev-server": "^4.2.0",
+    "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
+    "eslint": "^8.3.0"
   }
 }

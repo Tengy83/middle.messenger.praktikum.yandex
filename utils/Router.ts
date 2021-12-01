@@ -1,13 +1,18 @@
-import { Route } from "./Route";
-import { MessengerPage } from "../src/pages/MessengerPage";
+import { Route } from './Route';
+import { MessengerPage } from '@pages/MessengerPage';
 
-import { UserAPI } from "../utils/api/UserAPI";
-import { URL_LINKS } from "../constants";
+import { UserAPI } from '@utils/api/UserAPI';
+import { URL_LINKS } from '../constants';
 
 export class Router {
-  userAPI: UserAPI;
+  userAPI?: UserAPI;
+  static __instance: any;
+  routes: any;
+  history;
+  _currentRoute?: { leave: () => void } | null;
+  _rootQuery;
 
-  constructor(rootQuery) {
+  constructor(rootQuery: string) {
     if (Router.__instance) {
       return Router.__instance;
     }
@@ -22,7 +27,7 @@ export class Router {
     this.userAPI = new UserAPI();
   }
 
-  use(pathname: string, view: MessengerPage) {
+  use(pathname: string, view: object) {
     const route = new Route(pathname, view, { rootQuery: this._rootQuery });
 
     this.routes.push(route);
@@ -32,41 +37,39 @@ export class Router {
 
   start() {
     window.onpopstate = (event) => {
-      this._onRoute(event.currentTarget.location.pathname);
+      const currentTarget: any = <HTMLInputElement>event.currentTarget;
+      this._onRoute(currentTarget.location.pathname);
     };
 
     window.onclick = (event) => {
-      let pageLink = event.target.closest("[data-page]");
+      const pageLink = (<HTMLInputElement>event.target).closest('[data-page]');
       if (pageLink) {
-        let pageUrl = pageLink.dataset.page;
+        const pageUrl = pageLink.getAttribute('data-page');
 
-        this.go(`/${pageUrl === "home" || pageUrl === "/" ? "" : pageUrl}`);
+        this.go(`/${pageUrl === 'home' || pageUrl === '/' ? '' : pageUrl}`);
       }
     };
 
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname) {
+  _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
     if (!route) {
       return;
     }
 
-    this.userAPI.request().then((r) => {
-      let path = document.location.pathname;
-      if (
-        r.status !== 200 &&
-        path !== URL_LINKS.home &&
-        path !== URL_LINKS.error404 &&
-        path !== URL_LINKS.signUp
-      ) {
-        this.go(URL_LINKS.home);
-      } else if (r.status === 200 && path === URL_LINKS.home) {
-        this.go(URL_LINKS.chats);
-      }
-      return r;
-    });
+    if (this.userAPI) {
+      this.userAPI.request().then((r) => {
+        const path = document.location.pathname;
+        if (r.status !== 200 && path !== URL_LINKS.home && path !== URL_LINKS.error404 && path !== URL_LINKS.signUp) {
+          this.go(URL_LINKS.home);
+        } else if (r.status === 200 && path === URL_LINKS.home) {
+          this.go(URL_LINKS.chats);
+        }
+        return r;
+      });
+    }
 
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();
@@ -77,18 +80,21 @@ export class Router {
   }
 
   go(pathname: string) {
-    this.history.pushState({}, "", pathname);
+    if (this.history) {
+      this.history.pushState({}, '', pathname);
+    }
+
     this._onRoute(pathname);
   }
 
   getRoute(pathname: string) {
-    return this.routes.find((route) => route.match(pathname));
+    return this.routes.find((route: any) => route.match(pathname));
   }
 
   back() {
-    this.history.back();
+    if (this.history) this.history.back();
   }
   forward() {
-    this.history.forward();
+    if (this.history) this.history.forward();
   }
 }

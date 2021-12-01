@@ -1,6 +1,3 @@
-@import "../../scss/mixins";
-@import "../../scss/variables";
-
 .user {
   @include flex(center, center);
   padding: 30px 15px;

@@ -1,12 +1,12 @@
-import { Options } from "../../../utils/interfaces";
-import { FILES_URL, URL_LINKS } from "../../../constants";
+import { Options } from '@utils/interfaces';
+import { FILES_URL, URL_LINKS } from '@/constants';
 
-import { MessengerModule } from "../MessengerModule";
-import { Form } from "../form/Form";
-import { createEditUser } from "./editUser.tmpl";
-import { UserAPI } from "../../../utils/api/UserAPI";
-import { AvatarAPI } from "../../../utils/api/AvatarAPI";
-import { addError } from "../../../utils/utils";
+import { MessengerModule } from '@modules/MessengerModule';
+import { Form } from '@modules/form/Form';
+import { createEditUser } from './editUser.tmpl';
+import { UserAPI } from '@utils/api/UserAPI';
+import { AvatarAPI } from '@utils/api/AvatarAPI';
+import { addError } from '@utils/utils';
 
 export class EditUser extends MessengerModule {
   userAPI: UserAPI;
@@ -14,9 +14,8 @@ export class EditUser extends MessengerModule {
 
   constructor(options: Options) {
     super({
-      name: "EditUser",
+      name: 'EditUser',
       state: options.state,
-      ...options,
     });
 
     this.userAPI = new UserAPI();
@@ -41,17 +40,18 @@ export class EditUser extends MessengerModule {
   apiUser() {
     new UserAPI().request().then((result) => {
       if (result.status !== 200) {
-        addError(".edit-user__form", "Ошибка");
+        addError('.edit-user__form', 'Ошибка');
       } else {
-        let res = JSON.parse(result.response);
-        const form = document.querySelector(".edit-user__form");
+        const res = JSON.parse(result.response);
+        const form = document.querySelector('.edit-user__form');
         if (res.avatar) {
-          document
-            .querySelector(`.edit-user > img`)
-            .setAttribute("src", `${FILES_URL}${res.avatar}`);
+          const img = document.querySelector(`.edit-user > img`);
+
+          if (img) img.setAttribute('src', `${FILES_URL}${res.avatar}`);
         }
-        document.querySelector(`.edit-user__title`).textContent =
-          res.first_name;
+
+        const titleDOM = document.querySelector(`.edit-user__title`);
+        if (titleDOM) titleDOM.textContent = res.first_name;
 
         this.state.form.inputs.firstName.value = res.first_name;
         this.state.form.inputs.secondName.value = res.second_name;
@@ -60,48 +60,48 @@ export class EditUser extends MessengerModule {
         this.state.form.inputs.email.value = res.email;
         this.state.form.inputs.phone.value = res.phone;
 
-        document.querySelector(
-          `.edit-user__form input[name="first_name"]`
-        ).value = res.first_name;
-        document.querySelector(
-          `.edit-user__form input[name="second_name"]`
-        ).value = res.second_name;
-        document.querySelector(
-          `.edit-user__form input[name="display_name"]`
-        ).value = res.display_name;
-        document.querySelector(`.edit-user__form input[name="login"]`).value =
-          res.login;
-        document.querySelector(`.edit-user__form input[name="email"]`).value =
-          res.email;
-        document.querySelector(`.edit-user__form input[name="phone"]`).value =
-          res.phone;
+        const edit_form: any = document.querySelector(`.edit-user__form`);
+
+        const inputFirstName: any = edit_form.querySelector(`input[name="first_name"]`);
+        const inputSecondName: any = edit_form.querySelector(`input[name="second_name"]`);
+        const inputDisplayName: any = edit_form.querySelector(`input[name="display_name"]`);
+        const inputLogin: any = edit_form.querySelector(`input[name="login"]`);
+        const inputEmail: any = edit_form.querySelector(`input[name="email"]`);
+        const inputPhone: any = edit_form.querySelector(`input[name="phone"]`);
+
+        if (inputFirstName) inputFirstName.value = res.first_name;
+        if (inputSecondName) inputSecondName.value = res.second_name;
+        if (inputDisplayName) inputDisplayName.value = res.display_name;
+        if (inputLogin) inputLogin.value = res.login;
+        if (inputEmail) inputEmail.value = res.email;
+        if (inputPhone) inputPhone.value = res.phone;
       }
     });
   }
 
-  api(data): void {
-    let json = JSON.stringify(data);
+  api(data: any): void {
+    const json = JSON.stringify(data);
 
     this.userAPI.update(json).then((result) => {
       if (result.status !== 200) {
-        addError(".edit-user__form", "Ошибка");
+        addError('.edit-user__form', 'Ошибка');
       } else {
-        if (
-          document.querySelector(`.edit-user__form input[type="file"]`).files
-            .length
-        ) {
-          const form = document.querySelector(`.edit-user__form`);
-          const formData = new FormData(form);
-          this.avatarAPI.update(formData).then((result) => {
-            if (result.status !== 200) {
-              addError(".edit-user__form", "Ошибка загрузки файла");
-            } else {
-              alert("Изменения внесены");
-              window.location.href = URL_LINKS.user;
-            }
-          });
+        const inputFile: any = document.querySelector(`.edit-user__form input[type="file"]`);
+        if (inputFile.files.length) {
+          const form: any = document.querySelector(`.edit-user__form`);
+          if (form) {
+            const formData = new FormData(form);
+            this.avatarAPI.update(formData).then((result) => {
+              if (result.status !== 200) {
+                addError('.edit-user__form', 'Ошибка загрузки файла');
+              } else {
+                alert('Изменения внесены');
+                window.location.href = URL_LINKS.user;
+              }
+            });
+          }
         } else {
-          alert("Изменения внесены");
+          alert('Изменения внесены');
           window.location.href = URL_LINKS.user;
         }
       }

@@ -1,25 +1,24 @@
-import { MessengerModule } from "../MessengerModule";
-import { Form } from "../form/Form";
-import { createMessenger } from "./messenger.tmpl";
-import { Options } from "../../../utils/interfaces";
-import { URL_LINKS } from "../../../constants";
-import { TokenAPI } from "../../../utils/api/TokenAPI";
-import { ChatsAPI } from "../../../utils/api/ChatsAPI";
-import { UserAPI } from "../../../utils/api/UserAPI";
+import { MessengerModule } from '@modules/MessengerModule';
+import { Form } from '@modules/form/Form';
+import { createMessenger } from './messenger.tmpl';
+import { Options } from '@utils/interfaces';
+import { URL_LINKS } from '@/constants';
+import { TokenAPI } from '@utils/api/TokenAPI';
+import { ChatsAPI } from '@utils/api/ChatsAPI';
+import { UserAPI } from '@utils/api/UserAPI';
 
 const tokenAPI = new TokenAPI();
 const chatsAPI = new ChatsAPI();
 const userAPI = new UserAPI();
 
 export class Messenger extends MessengerModule {
-  _token: string;
-  _socket: WebSocket;
+  _token?: string;
+  _socket?: WebSocket;
 
   constructor(options: Options) {
     super({
-      name: "Messenger",
+      name: 'Messenger',
       state: options.state,
-      ...options,
     });
   }
 
@@ -38,22 +37,20 @@ export class Messenger extends MessengerModule {
     this.setTemplate(messengerTmpl);
   }
 
-  api(data) {
-    let messageInput = document.querySelector(".message__input");
-    messageInput.value = "";
-    this._socket.send(
-      JSON.stringify({
-        content: data.message,
-        type: "message",
-      })
-    );
+  api(data: any) {
+    const messageInput: any = document.querySelector('.message__input');
+    messageInput.value = '';
+
+    if (this._socket)
+      this._socket.send(
+        JSON.stringify({
+          content: data.message,
+          type: 'message',
+        })
+      );
   }
 
-  listItem(
-    message: string = "",
-    time: string = "",
-    className: string = "companion"
-  ) {
+  listItem(message = '', time = '', className = 'companion') {
     return `<li class="${className} message-list__item">
     <div class="message__content">${message}</div>
     <div class="message__data">${time}</div>
@@ -61,10 +58,10 @@ export class Messenger extends MessengerModule {
   }
 
   getTokenAPI() {
-    let paramsUrl = document.location.search;
-    let chatId = "";
+    const paramsUrl = document.location.search;
+    let chatId = '';
     if (paramsUrl) {
-      chatId = new URLSearchParams(paramsUrl).get("chat");
+      chatId = new URLSearchParams(paramsUrl).get('chat') || '';
 
       return tokenAPI
         .request(chatId)
@@ -78,34 +75,33 @@ export class Messenger extends MessengerModule {
             .request()
             .then((r) => JSON.parse(r.response))
             .then((data) => {
-              this._socket = new WebSocket(
-                `wss://ya-praktikum.tech/ws/chats/${data.id}/${chatId}/${token}`
-              );
+              this._socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${data.id}/${chatId}/${token}`);
 
-              this._socket.addEventListener("open", () => {
-                console.log("Соединение установлено");
-
-                this._socket.send(
-                  JSON.stringify({
-                    content: "0",
-                    type: "get old",
-                  })
-                );
-              });
-
-              this._socket.addEventListener("close", (event) => {
-                if (event.wasClean) {
-                  console.log("Соединение закрыто чисто");
-                } else {
-                  console.log("Обрыв соединения");
+              this._socket.addEventListener('open', () => {
+                console.log('Соединение установлено');
+                if (this._socket) {
+                  this._socket.send(
+                    JSON.stringify({
+                      content: '0',
+                      type: 'get old',
+                    })
+                  );
                 }
               });
 
-              const listMessages = document.querySelector(".message__list");
-              this._socket.addEventListener("message", (event) => {
-                let messageData = JSON.parse(event.data);
+              this._socket.addEventListener('close', (event) => {
+                if (event.wasClean) {
+                  console.log('Соединение закрыто чисто');
+                } else {
+                  console.log('Обрыв соединения');
+                }
+              });
 
-                if (messageData.type === "message") {
+              const listMessages = document.querySelector('.message__list');
+              this._socket.addEventListener('message', (event) => {
+                const messageData = JSON.parse(event.data);
+
+                if (messageData.type === 'message') {
                   this.message(listMessages, messageData, data.id);
                 } else if (Array.isArray(messageData)) {
                   messageData.forEach((mes) => {
@@ -114,8 +110,8 @@ export class Messenger extends MessengerModule {
                 }
               });
 
-              this._socket.addEventListener("error", (event) => {
-                console.log("Ошибка", event.message);
+              this._socket.addEventListener('error', (event: any) => {
+                console.log('Ошибка', event.message);
               });
             });
         });
@@ -133,16 +129,12 @@ export class Messenger extends MessengerModule {
     }
   }
 
-  message(listMessages, messageData, userId) {
-    let time = new Date(messageData.time).toLocaleTimeString().slice(0, -3);
+  message(listMessages: any, messageData: any, userId: any) {
+    const time = new Date(messageData.time).toLocaleTimeString().slice(0, -3);
 
     listMessages.insertAdjacentHTML(
-      "beforeEnd",
-      this.listItem(
-        messageData.content,
-        time,
-        messageData.user_id === userId ? "user" : "companion"
-      )
+      'beforeEnd',
+      this.listItem(messageData.content, time, messageData.user_id === userId ? 'user' : 'companion')
     );
   }
 }

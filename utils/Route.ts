@@ -1,14 +1,14 @@
-import { MessengerPage } from "../src/pages/MessengerPage";
-import { isEqual } from "../utils/utils";
-import { render } from "../utils/utils";
+import { MessengerPage } from '@pages/MessengerPage';
+import { isEqual } from '@utils/utils';
+import { render } from '@utils/utils';
 
 export class Route {
-  _pathname: string;
-  _pageComponent: MessengerPage;
-  _page: null | MessengerPage;
-  _props: object;
+  _pathname: any;
+  _pageComponent: any;
+  _page: any;
+  _props: any;
 
-  constructor(pathname: string, view: MessengerPage, props: object) {
+  constructor(pathname: string, view: object, props: object) {
     this._pathname = pathname;
     this._pageComponent = view;
     this._page = null;
@@ -28,7 +28,7 @@ export class Route {
     }
   }
 
-  match(pathname: string): boolean {
+  match(pathname: any): boolean {
     return isEqual(pathname, this._pathname);
   }
 

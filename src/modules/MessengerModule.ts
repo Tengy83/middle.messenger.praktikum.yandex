@@ -1,38 +1,38 @@
-import { Options } from "../../utils/interfaces";
-import { v4 as makeUUID } from "uuid";
-import { Templator } from "../../utils/Templator";
-import { EventBus } from "../../utils/EventBus";
-import { DomListener } from "../../utils/DomListener";
+import { Options } from '@utils/interfaces';
+import { v4 as makeUUID } from 'uuid';
+import { Templator } from '@utils/Templator';
+import { EventBus } from '@utils/EventBus';
+import { DomListener } from '@utils/DomListener';
 
 enum EVENTS {
-  INIT = "init",
-  FLOW_CDM = "flow:component-did-mount",
-  FLOW_CDU = "flow:component-did-update",
-  FLOW_RENDER = "flow:render",
+  INIT = 'init',
+  FLOW_CDM = 'flow:component-did-mount',
+  FLOW_CDU = 'flow:component-did-update',
+  FLOW_RENDER = 'flow:render',
 }
 
 export abstract class MessengerModule extends DomListener {
   readonly name: string;
-  element: HTMLElement | null;
-  _id: string | null;
+  element?: HTMLElement | null;
+  _id?: string | null;
   state: any;
   template: string;
   tmpl: Templator;
   eventBus: Function;
-  internalComponentsList: MessengerModule[] | null;
+  internalComponentsList: object[] | null;
 
   constructor(options: Options) {
     super(options.name, options.listeners);
     const eventBus = new EventBus();
 
-    this.name = options.name;
+    this.name = options.name || '';
     if (options.listeners) {
       this._id = makeUUID();
     }
 
     this.state = this._makePropsProxy(options.state);
     this.internalComponentsList = options.internalComponentsList || [];
-    this.template = options.template || "";
+    this.template = options.template || '';
     this.tmpl = new Templator(this.template);
     this.eventBus = () => eventBus;
 
@@ -44,7 +44,7 @@ export abstract class MessengerModule extends DomListener {
 
   prepare() {}
 
-  _registerEvents(eventBus) {
+  _registerEvents(eventBus: any) {
     eventBus.on(EVENTS.INIT, this.init.bind(this));
     eventBus.on(EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -52,13 +52,13 @@ export abstract class MessengerModule extends DomListener {
   }
 
   _createResources() {
-    const { tagName = "div", className } = this.state;
+    const { tagName = 'div', className } = this.state;
     const newElement = this._createDocumentElement(tagName);
     if (className) {
       newElement.className = className;
     }
     if (this._id) {
-      newElement.setAttribute("data-id", this._id);
+      newElement.setAttribute('data-id', this._id);
     }
     this.element = newElement;
   }
@@ -73,9 +73,9 @@ export abstract class MessengerModule extends DomListener {
     this.eventBus().emit(EVENTS.FLOW_RENDER);
   }
 
-  componentDidMount(oldProps) {}
+  componentDidMount(oldProps?: any) {}
 
-  _componentDidUpdate(oldProps, newProps) {
+  _componentDidUpdate(oldProps: any, newProps: any) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (!response) {
       return;
@@ -83,11 +83,11 @@ export abstract class MessengerModule extends DomListener {
     this._render();
   }
 
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate(oldProps: any, newProps: any) {
     return true;
   }
 
-  setState = (nextProps) => {
+  setState = (nextProps: any) => {
     if (!nextProps) {
       return;
     }
@@ -96,20 +96,20 @@ export abstract class MessengerModule extends DomListener {
   };
 
   _render(): void {
-    this.element.innerHTML = this.tmpl.compile(this.state);
+    if (this.element) this.element.innerHTML = this.tmpl.compile(this.state);
   }
 
   getContent() {
     return this.element;
   }
 
-  _makePropsProxy(props) {
+  _makePropsProxy(props: any) {
     const self = this;
 
     return new Proxy(props, {
       get(target, prop) {
         const value = target[prop];
-        return typeof value === "function" ? value.bind(target) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
       set(target, prop, value) {
         target[prop] = value;
@@ -118,12 +118,12 @@ export abstract class MessengerModule extends DomListener {
         return true;
       },
       deleteProperty() {
-        throw new Error("Нет доступа");
+        throw new Error('Нет доступа');
       },
     });
   }
 
-  _createDocumentElement(tagName) {
+  _createDocumentElement(tagName: string) {
     return document.createElement(tagName);
   }
 
@@ -146,25 +146,22 @@ export abstract class MessengerModule extends DomListener {
     return this.tmpl.compile(this.state);
   }
 
-  createComponentsTmpl(
-    stateComponents: object,
-    createComponentTmpl: string
-  ): string {
-    let tmpl = "";
+  createComponentsTmpl(stateComponents: object, createComponentTmpl: any): string {
+    let tmpl = '';
     Object.entries(stateComponents).forEach(function (compState) {
       tmpl += createComponentTmpl(compState[1], compState[0]);
     });
     return tmpl;
   }
 
-  getId(): string {
+  getId(): string | null | undefined {
     return this._id;
   }
 
-  getInternalComponentsList(): MessengerModule[] | null {
+  getInternalComponentsList(): object[] | null {
     return this.internalComponentsList;
   }
   addToInternalComponentsList(module: MessengerModule): number {
-    return this.internalComponentsList.push(module);
+    return this.internalComponentsList ? this.internalComponentsList.push(module) : 0;
   }
 }

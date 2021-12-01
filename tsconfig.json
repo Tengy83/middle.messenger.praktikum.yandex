@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "es2016",
-    "declaration": false,
+    "target": "es5",
     "module": "commonjs",
-    "alwaysStrict": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "lib": ["esnext", "dom"],
+    "declaration": true,
     "sourceMap": true,
-    "strictNullChecks": true
-  }
+    "outDir": "./dist",
+    "strict": true,
+    "moduleResolution": "node",
+    "typeRoots": ["node_modules/@types", "src/typings.d.ts"],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "exclude": ["node_modules"]
 }

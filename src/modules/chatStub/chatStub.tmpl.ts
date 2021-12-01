@@ -1,3 +1,3 @@
 export function createChatStub(): string {
-  return `<h1>{{ text }}</h1>`;
+  return `<h1>{{ title }}</h1>`;
 }

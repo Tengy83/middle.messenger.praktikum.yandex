@@ -1,15 +1,21 @@
 {
-  "plugins": ["prettier", "unicorn"],
+  "root": true,
   "env": {
-    "es6": true,
     "browser": true,
-    "node": true
+    "es6": true,
+    "es2017": true
   },
-  "rules": {
-    "arrow-parens": "off",
-    "comma-dangle": "off",
-    "require-jsdoc": "off",
-    "quotes": [2, "single", { "avoidEscape": true }]
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "tsconfig.json",
+    "tsconfigRootDir": "."
   },
-  "extends": ["eslint:recommended", "google"]
+  "plugins": ["@typescript-eslint"],
+  "rules": {}
 }

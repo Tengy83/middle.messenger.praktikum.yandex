@@ -1,13 +1,9 @@
-import { MessengerPage } from "../src/pages/MessengerPage";
+import { MessengerPage } from '@pages/MessengerPage';
 
-export function getObjValue(
-  obj: object,
-  path: string,
-  defaultValue?: object
-): object {
-  const keys = path.split(".");
-  let result = obj;
-  for (let key of keys) {
+export function getObjValue(obj: object, path: string, defaultValue: object = {}): object {
+  const keys = path.split('.');
+  let result: any = obj;
+  for (const key of keys) {
     result = result[key];
     if (result === undefined) {
       return defaultValue;
@@ -21,25 +17,20 @@ export function identity<T>(val: T): T {
   return val;
 }
 
-export function last<T>(arr: T[]): T {
+export function last<T>(arr: T[]): T | undefined {
   const length = arr.length;
   return length ? arr[length - 1] : undefined;
 }
 
-export function first<T>(arr: T[]): T {
+export function first<T>(arr: T[]): T | undefined {
   return arr.length ? arr[0] : undefined;
 }
 
-export function range(
-  start: number = 0,
-  end: number = start,
-  iteration: number = 1,
-  isRight: boolean = false
-): number[] {
-  const arr = [];
+export function range(start = 0, end: number = start, iteration = 1, isRight = false): number[] | undefined {
+  const arr: any[] = [];
 
   if (isNaN(start) || isNaN(end) || isNaN(iteration)) {
-    console.error("Error: Argument of the wrong type");
+    console.error('Error: Argument of the wrong type');
     return undefined;
   }
 
@@ -64,12 +55,7 @@ export function range(
   return isRight ? arr.reverse() : arr;
 }
 
-export function rangeRight(
-  start: number,
-  end: number = start,
-  iteration: number = 1,
-  isRight?: boolean
-): number[] {
+export function rangeRight(start: number, end: number = start, iteration = 1, isRight?: boolean): number[] | undefined {
   return range(start, end, iteration, true);
 }
 
@@ -81,7 +67,7 @@ export function isEmpty(arg: any): boolean {
   const type = typeof arg;
 
   switch (type) {
-    case "object":
+    case 'object':
       if (
         (arg.constructor === Object && Object.keys(arg).length === 0) ||
         (Array.isArray(arg) && arg.length === 0) ||
@@ -92,8 +78,8 @@ export function isEmpty(arg: any): boolean {
       }
       return false;
 
-    case "number":
-    case "boolean":
+    case 'number':
+    case 'boolean':
       return true;
 
     default:
@@ -111,8 +97,8 @@ export function render(query: string, page: MessengerPage) {
 }
 
 export function capitalize(string: string): string {
-  if (typeof string !== "string") {
-    return "";
+  if (typeof string !== 'string') {
+    return '';
   }
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -122,66 +108,20 @@ export function trim(string: string, chars?: string): string {
     return string.trim();
   }
 
-  const reg = new RegExp(`[${chars}]`, "gi");
-  return string.replace(reg, "");
+  const reg = new RegExp(`[${chars}]`, 'gi');
+  return string.replace(reg, '');
 }
 
-type Indexed<T = unknown> = {
-  [key in string]: T;
-};
-
-export function merge(lhs: Indexed, rhs: Indexed): Indexed {
-  for (let p in rhs) {
-    if (!rhs.hasOwnProperty(p)) {
-      continue;
-    }
-
-    try {
-      if (rhs[p].constructor === Object) {
-        rhs[p] = merge(lhs[p] as Indexed, rhs[p] as Indexed);
-      } else {
-        lhs[p] = rhs[p];
-      }
-    } catch (e) {
-      lhs[p] = rhs[p];
-    }
-  }
-
-  return lhs;
-}
-
-export function set(
-  object: Indexed | unknown,
-  path: string,
-  value: unknown
-): Indexed | unknown {
-  if (typeof object !== "object" || object === null) {
-    return object;
-  }
-
-  if (typeof path !== "string") {
-    throw new Error("path must be string");
-  }
-
-  const result = path.split(".").reduceRight<Indexed>(
-    (acc, key) => ({
-      [key]: acc,
-    }),
-    value as any
-  );
-  return merge(object as Indexed, result);
-}
-
-type PlainObject<T = unknown> = {
+type PlainObject<T = any> = {
   [k in string]: T;
 };
 
 export function isPlainObject(value: unknown): value is PlainObject {
   return (
-    typeof value === "object" &&
+    typeof value === 'object' &&
     value !== null &&
     value.constructor === Object &&
-    Object.prototype.toString.call(value) === "[object Object]"
+    Object.prototype.toString.call(value) === '[object Object]'
   );
 }
 
@@ -234,10 +174,8 @@ export function getParams(data: PlainObject | [], parentKey?: string) {
 }
 
 export function cloneDeep<T extends object = object>(obj: T) {
-  return (function _cloneDeep(
-    item: T
-  ): T | Date | Set<unknown> | Map<unknown, unknown> | object | T[] {
-    if (item === null || typeof item !== "object") {
+  return (function _cloneDeep(item: any): T | Date | Set<unknown> | Map<unknown, unknown> | object | T[] {
+    if (item === null || typeof item !== 'object') {
       return item;
     }
 
@@ -246,7 +184,7 @@ export function cloneDeep<T extends object = object>(obj: T) {
     }
 
     if (item instanceof Array) {
-      let copy = [];
+      const copy: any[] = [];
 
       item.forEach((_, i) => (copy[i] = _cloneDeep(item[i])));
 
@@ -254,7 +192,7 @@ export function cloneDeep<T extends object = object>(obj: T) {
     }
 
     if (item instanceof Set) {
-      let copy = new Set();
+      const copy = new Set();
 
       item.forEach((v) => copy.add(_cloneDeep(v)));
 
@@ -262,7 +200,7 @@ export function cloneDeep<T extends object = object>(obj: T) {
     }
 
     if (item instanceof Map) {
-      let copy = new Map();
+      const copy = new Map();
 
       item.forEach((v, k) => copy.set(k, _cloneDeep(v)));
 
@@ -270,11 +208,9 @@ export function cloneDeep<T extends object = object>(obj: T) {
     }
 
     if (item instanceof Object) {
-      let copy: object = {};
+      const copy: any = {};
 
-      Object.getOwnPropertySymbols(item).forEach(
-        (s) => (copy[s] = _cloneDeep(item[s]))
-      );
+      Object.getOwnPropertySymbols(item).forEach((s) => (copy[s] = _cloneDeep(item[s])));
 
       Object.keys(item).forEach((k) => (copy[k] = _cloneDeep(item[k])));
 
@@ -285,17 +221,17 @@ export function cloneDeep<T extends object = object>(obj: T) {
   })(obj);
 }
 
-type StringIndexed = Record<string, any>;
+type StringIndexed = { [index: string]: any };
 
 export function queryStringify(data: StringIndexed): string | never {
-  if (typeof data !== "object") {
-    throw new Error("Data must be object");
+  if (typeof data !== 'object') {
+    throw new Error('Data must be object');
   }
 
   const keys = Object.keys(data);
   return keys.reduce((result, key, index) => {
     const value = data[key];
-    const endLine = index < keys.length - 1 ? "&" : "";
+    const endLine = index < keys.length - 1 ? '&' : '';
 
     if (Array.isArray(value)) {
       const arrayValue = value.reduce<StringIndexed>(
@@ -309,7 +245,7 @@ export function queryStringify(data: StringIndexed): string | never {
       return `${result}${queryStringify(arrayValue)}${endLine}`;
     }
 
-    if (typeof value === "object") {
+    if (typeof value === 'object' && value !== null) {
       const objValue = Object.keys(value || {}).reduce<StringIndexed>(
         (result, objKey) => ({
           ...result,
@@ -322,24 +258,20 @@ export function queryStringify(data: StringIndexed): string | never {
     }
 
     return `${result}${key}=${value}${endLine}`;
-  }, "");
+  }, '');
 }
 
 export function queryString(data: PlainObject) {
   if (!isPlainObject(data)) {
-    throw new Error("Data must be an object");
+    throw new Error('Data must be an object');
   }
 
   return getParams(data)
-    .map((arr) => arr.join("="))
-    .join("&");
+    .map((arr) => arr.join('='))
+    .join('&');
 }
 
-export function addError(
-  className: string,
-  txt: string,
-  whereAdd: string = "afterBegin"
-): void {
+export function addError(className: string, txt: string, whereAdd: InsertPosition = 'afterbegin'): void {
   const block = document.querySelector(`${className}`);
   const errorBlock = document.querySelector(`${className} .error-block`);
 
